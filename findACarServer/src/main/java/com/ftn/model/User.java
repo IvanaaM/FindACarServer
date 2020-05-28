@@ -1,13 +1,16 @@
 package com.ftn.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Table
 @Entity(name="User")
 public class User {
 	
@@ -26,16 +29,12 @@ public class User {
 	
 	@Column(name="Password")
 	private String password;
+	
+	@OneToMany
+	private Set<Reservation> reservations = new HashSet<Reservation>();
 
 	public User() {
 		super();
-	}
-
-	public User(String firstName, String lastName, String email, String password) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
 	}
 
 	public long getId() {
@@ -76,6 +75,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Set<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(Set<Reservation> reservations) {
+		this.reservations = reservations;
 	}
 	
 	
