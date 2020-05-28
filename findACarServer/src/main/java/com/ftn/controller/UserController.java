@@ -2,9 +2,7 @@ package com.ftn.controller;
 
 import com.ftn.dto.RegisterDTO;
 import com.ftn.service.AuthService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import com.ftn.dto.LogInDTO;
 import com.ftn.service.UserService;
 
