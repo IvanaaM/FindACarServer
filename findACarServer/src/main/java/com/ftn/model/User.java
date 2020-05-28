@@ -1,5 +1,7 @@
 package com.ftn.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -8,8 +10,9 @@ import java.util.Set;
 @Entity(name = "User")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private long id;
 
     @Column(name = "FirstName")
@@ -38,7 +41,17 @@ public class User {
         super();
     }
 
-    public long getId() {
+	public User(String firstName, String lastName, String email, String password, LocalDate registrationDate, String token, String salt) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.registrationDate = registrationDate;
+		this.token = token;
+		this.salt = salt;
+	}
+
+	public long getId() {
         return id;
     }
 

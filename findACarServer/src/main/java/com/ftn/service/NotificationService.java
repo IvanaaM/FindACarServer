@@ -38,11 +38,10 @@ public class NotificationService {
     }
 
     public void sendVerifyEmail(User user) {
-        String token = UUID.randomUUID().toString();
-        user.setToken(token);
+
         String subject = "Email verification";
         String confirmationUrl
-                = host + "/confirm-registration/" + token;
+                = host + "/user/confirm-registration/" + user.getToken();
         String emailText = "In order to be able to login, you must verify your email address. Click on this link to verify:  \n";
         try {
             sendEmail(user, subject, emailText + confirmationUrl);

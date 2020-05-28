@@ -6,6 +6,7 @@ import com.ftn.utils.PasswordUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Service
 public class AuthService {
@@ -31,8 +32,8 @@ public class AuthService {
             }
 
             if (!error) {
-                User newUser = new User(registration.getName(), registration.getSurname(), registration.getEmail(), encodedPassword);
-                newUser.setSalt(salt);
+                String token = UUID.randomUUID().toString();
+                User newUser = new User(registration.getName(), registration.getSurname(), registration.getEmail(), encodedPassword, LocalDate.now(), token, salt);
                 success = userService.insert(newUser);
                 if (success){
                     notificationService.sendVerifyEmail(newUser);
@@ -44,11 +45,13 @@ public class AuthService {
 
     public boolean verifyEmail(String token) {
         boolean success = false;
+        if (token == null){
+            return success;
+        }
         User user = userService.findByToken(token);
-        if (user != null) {
+        if (user != null && user.getToken()!= null) {
             if (token.equals(user.getToken())) {
                 user.setEmailVerified(true);
-                user.setRegistrationDate(LocalDate.now());
                 user.setToken(null);
                 userService.edit(user);
                 success = userService.edit(user);

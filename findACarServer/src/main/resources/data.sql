@@ -1,4 +1,5 @@
-insert into user values (1, "a", "Marko", "Markovic", "a");
+-- sifra je: admin
+insert into user  (email, email_verified, first_name, last_name, password, registration_date, salt, token) values ("marko@mailinator.com", true , "Marko", "Markovic", "ORY3tic/hPfVpVk+bzsAFxgjIEXPNVUVvFEJzpHYWcs=", "2020-05-20", "fD5EfEJiiyj4SRuyVC70bu5rxUtlVC", NULL );
 
 insert into address values (1, "Novi Sad", "Serbia", "21 000", "Branka Bajica 12");
 insert into address values (2, "Novi Sad", "Serbia", "21 000", "Narodnog fronta 64");
