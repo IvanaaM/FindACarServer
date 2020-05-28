@@ -34,19 +34,20 @@ public class UserService {
         return success;
     }
 
-    public boolean edit(User user){
-		boolean success = false;
-    	if (findById(user.getId()) != null){
-    		User edited = userRepository.save(user);
-    		if (edited != null){
-    			success = true;
-			}
-		}
-		return success;
-	}
+    public boolean edit(User user) {
+        boolean success = false;
+        if (findById(user.getId()) != null) {
+            User edited = userRepository.save(user);
+            if (edited != null) {
+                success = true;
+            }
+        }
+        return success;
+    }
+
     public User findById(Long userId) {
         User user = null;
-        if (userRepository.findById(userId).isPresent()){
+        if (userRepository.findById(userId).isPresent()) {
             user = userRepository.findById(userId).get();
         }
         return user;

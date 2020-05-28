@@ -35,7 +35,7 @@ public class AuthService {
                 String token = UUID.randomUUID().toString();
                 User newUser = new User(registration.getName(), registration.getSurname(), registration.getEmail(), encodedPassword, LocalDate.now(), token, salt);
                 success = userService.insert(newUser);
-                if (success){
+                if (success) {
                     notificationService.sendVerifyEmail(newUser);
                 }
             }
@@ -45,11 +45,11 @@ public class AuthService {
 
     public boolean verifyEmail(String token) {
         boolean success = false;
-        if (token == null){
+        if (token == null) {
             return success;
         }
         User user = userService.findByToken(token);
-        if (user != null && user.getToken()!= null) {
+        if (user != null && user.getToken() != null) {
             if (token.equals(user.getToken())) {
                 user.setEmailVerified(true);
                 user.setToken(null);

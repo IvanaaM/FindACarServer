@@ -2,6 +2,7 @@ package com.ftn.controller;
 
 import com.ftn.dto.RegisterDTO;
 import com.ftn.service.AuthService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.ftn.dto.LogInDTO;
 import com.ftn.service.UserService;
@@ -27,13 +28,22 @@ public class UserController {
     }
 
     @PostMapping("/auth/register")
-    public boolean register(@RequestBody RegisterDTO registerDTO) {
-        return authService.register(registerDTO);
+    public ResponseEntity<Void> register(@RequestBody RegisterDTO registerDTO) {
+
+        if (authService.register(registerDTO)) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @GetMapping("/confirm-registration/{token}")
-    public boolean confirmRegistration(@PathVariable String token) {
-        return authService.verifyEmail(token);
+    public ResponseEntity<Void> confirmRegistration(@PathVariable String token) {
+        if (authService.verifyEmail(token)) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 }
