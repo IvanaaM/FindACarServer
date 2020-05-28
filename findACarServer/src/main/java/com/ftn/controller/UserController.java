@@ -1,11 +1,9 @@
 package com.ftn.controller;
 
+import com.ftn.dto.RegisterDTO;
+import com.ftn.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.ftn.dto.LogInDTO;
 import com.ftn.service.UserService;
@@ -13,17 +11,31 @@ import com.ftn.service.UserService;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-	
-	@Autowired
-	UserService userService;
-	
-	@PostMapping(path = "/logIn", produces = "application/json; charset=UTF-8")
-	public boolean logIn(@RequestBody LogInDTO userDTO) {
-		
-		boolean exists = userService.logIn(userDTO);
-		
-		return exists;
-		
-	}
+
+    UserService userService;
+    AuthService authService;
+
+    public UserController(UserService userService, AuthService authService) {
+        this.userService = userService;
+        this.authService = authService;
+    }
+
+    @PostMapping(path = "/logIn", produces = "application/json; charset=UTF-8")
+    public boolean logIn(@RequestBody LogInDTO userDTO) {
+
+        boolean exists = userService.logIn(userDTO);
+        return exists;
+
+    }
+
+    @PostMapping("/auth/register")
+    public boolean register(@RequestBody RegisterDTO registerDTO) {
+        return authService.register(registerDTO);
+    }
+
+    @GetMapping("/confirm-registration/{token}")
+    public boolean confirmRegistration(@PathVariable String token) {
+        return authService.verifyEmail(token);
+    }
 
 }

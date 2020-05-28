@@ -1,11 +1,7 @@
 package com.ftn.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @Table
 @Entity(name="User")
@@ -26,6 +22,15 @@ public class User {
 	
 	@Column(name="Password")
 	private String password;
+	@Column
+	private boolean emailVerified;
+	@Column
+	private String token;
+	@Column
+	private LocalDate registrationDate;
+	@Column
+	private String salt;
+
 
 	public User() {
 		super();
@@ -77,7 +82,37 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 
+	public boolean isEmailVerified() {
+		return emailVerified;
+	}
+
+	public void setEmailVerified(boolean emailVerified) {
+		this.emailVerified = emailVerified;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public LocalDate getRegistrationDate() {
+		return registrationDate;
+	}
+
+	public void setRegistrationDate(LocalDate registrationDate) {
+		this.registrationDate = registrationDate;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+	
 }
