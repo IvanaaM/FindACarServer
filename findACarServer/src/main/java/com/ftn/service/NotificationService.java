@@ -15,8 +15,8 @@ public class NotificationService {
     private UserService userService;
 
     @Autowired
-    public NotificationService(@Value("${server.address.BE}") String host, JavaMailSender mailSender, UserService userService) {
-        this.host = host;
+    public NotificationService(JavaMailSender mailSender, UserService userService) {
+        this.host = "http://localhost:8057";
         this.mailSender = mailSender;
         this.userService = userService;
     }
