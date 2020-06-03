@@ -22,7 +22,7 @@ public class Review {
 	private String comment;
 	
 	@Column(name="Rating")
-    private double rating;
+    private Double rating;
 		
 	@Column(name="Date")
     private LocalDate date;
@@ -55,7 +55,7 @@ public class Review {
 	}
 
 	
-	public double getRating() {
+	public Double getRating() {
 		return rating;
 	}
 

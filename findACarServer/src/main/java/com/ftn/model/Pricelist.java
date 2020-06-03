@@ -15,9 +15,6 @@ public class Pricelist {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@OneToOne
-	private Vehicle vehicle;
-	
 	@Column(name="PriceADay")
 	private double priceADay;
 	
@@ -35,14 +32,6 @@ public class Pricelist {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public Vehicle getVehicle() {
-		return vehicle;
-	}
-
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
 	}
 
 	public double getPriceADay() {

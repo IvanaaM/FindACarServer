@@ -8,10 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="Vehicle")
 public class Vehicle {
@@ -23,9 +24,6 @@ public class Vehicle {
 	@Column(name="Name")
 	private String name;
 	
-	@ManyToOne
-	private CarService carService;
-
 	@Column(name="Description")
     private String description;
 
@@ -62,7 +60,14 @@ public class Vehicle {
 	@Column(name="Mileage")
 	private String mileage;
 	
+	@Transient
+	private double priceForDays;
+	
+	@OneToOne
+	private Pricelist pricelist;
+	
 	@OneToMany
+	@JsonIgnore
 	private Set<Review> comments = new HashSet<Review>();
 	
     // image;
@@ -88,14 +93,6 @@ public class Vehicle {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public CarService getCarService() {
-		return carService;
-	}
-
-	public void setCarService(CarService carService) {
-		this.carService = carService;
 	}
 
 	public String getDescription() {
@@ -200,6 +197,22 @@ public class Vehicle {
 
 	public void setComments(Set<Review> comments) {
 		this.comments = comments;
+	}
+
+	public double getPriceForDays() {
+		return priceForDays;
+	}
+
+	public void setPriceForDays(double priceForDays) {
+		this.priceForDays = priceForDays;
+	}
+
+	public Pricelist getPricelist() {
+		return pricelist;
+	}
+
+	public void setPricelist(Pricelist pricelist) {
+		this.pricelist = pricelist;
 	}
 
 	
