@@ -29,7 +29,10 @@ public class Review {
 	
 	@ManyToOne
     private User user;
-	
+
+	@ManyToOne
+	private CarService carService;
+
 	public Review() {
 		super();
 
@@ -76,5 +79,11 @@ public class Review {
 		this.user = user;
 	}
 
-	
+	public CarService getCarService() {
+		return carService;
+	}
+
+	public void setCarService(CarService carService) {
+		this.carService = carService;
+	}
 }

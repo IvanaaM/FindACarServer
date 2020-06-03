@@ -24,6 +24,9 @@ public class CarService {
 	
 	@Column(name="Phone")
 	private String phone;
+
+	@Column
+	private String landlinePhone;
 	
 	@Column(name="Email")
 	private String email;
@@ -90,6 +93,19 @@ public class CarService {
 		this.about = about;
 	}
 
-	
+	public String getLandlinePhone() {
+		return landlinePhone;
+	}
 
+	public void setLandlinePhone(String landlinePhone) {
+		this.landlinePhone = landlinePhone;
+	}
+
+	public Set<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(Set<Review> reviews) {
+		this.reviews = reviews;
+	}
 }

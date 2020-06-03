@@ -18,7 +18,7 @@ public class UserService {
         boolean success = false;
         User u = userRepository.findByEmail(userDTO.getEmail());
 
-        if (u != null) {
+        if (u != null && u.isEmailVerified()) {
             if (PasswordUtils.verifyUserPassword(userDTO.getPassword(), u.getPassword(), u.getSalt())) {
                 success = true;
             }
