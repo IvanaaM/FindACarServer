@@ -1,21 +1,41 @@
 package com.ftn.service;
 
+import java.awt.PageAttributes.MediaType;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+import java.util.zip.DeflaterOutputStream;
+
+import org.apache.commons.fileupload.FileItemStream;
+import org.apache.commons.fileupload.disk.DiskFileItem;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 import org.joda.time.Period;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 
 import com.ftn.dto.SearchDTO;
 import com.ftn.dto.SearchVehiclesDTO;
@@ -84,6 +104,16 @@ public class CarServiceService {
 		CarService cs = carSRepository.findById(svDTO.getId()).get();
 		
 		for(Vehicle v : cs.getVehicles()) {
+			
+		
+				//byte[] fileContent = FileUtils.readFileToByteArray(new File(v.getImage()));
+				//String encodedString = Base64.getEncoder().encodeToString(fileContent);
+			
+				//System.out.println(multipartFile);
+				//System.out.println(encodedString);
+				v.setImageFile(v.getImage());
+		
+			
 			v.setPriceForDays(v.getPricelist().getPriceADay()*days);
 			if(reservations.size() !=0) {
 				for(Reservation r : reservations) {
@@ -110,5 +140,21 @@ public class CarServiceService {
 		
 		return vehicles;
 	}
+	
+	public static byte[] compress(byte[] in) {
+	    try {
+	        ByteArrayOutputStream out = new ByteArrayOutputStream();
+	        DeflaterOutputStream defl = new DeflaterOutputStream(out);
+	        defl.write(in);
+	        defl.flush();
+	        defl.close();
+
+	        return out.toByteArray();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
+
 
 }

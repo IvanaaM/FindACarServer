@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="Vehicle")
@@ -70,7 +72,12 @@ public class Vehicle {
 	@JsonIgnore
 	private Set<Review> comments = new HashSet<Review>();
 	
-    // image;
+    @Column(name="Image")
+    @JsonIgnore
+    private String image;
+    
+    @Transient
+    private String imageFile;
     // images;
 	
 
@@ -213,6 +220,22 @@ public class Vehicle {
 
 	public void setPricelist(Pricelist pricelist) {
 		this.pricelist = pricelist;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getImageFile() {
+		return imageFile;
+	}
+
+	public void setImageFile(String imageFile) {
+		this.imageFile = imageFile;
 	}
 
 	
