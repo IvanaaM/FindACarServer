@@ -28,6 +28,9 @@ public class CarService {
 	
 	@Column(name="Phone")
 	private String phone;
+
+	@Column
+	private String landlinePhone;
 	
 	@Column(name="Email")
 	private String email;
@@ -115,6 +118,12 @@ public class CarService {
 		this.vehicles = vehicles;
 	}
 
-	
+	public String getLandlinePhone() {
+		return landlinePhone;
+	}
+
+	public void setLandlinePhone(String landlinePhone) {
+		this.landlinePhone = landlinePhone;
+	}
 
 }

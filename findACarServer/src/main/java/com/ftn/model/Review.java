@@ -22,14 +22,17 @@ public class Review {
 	private String comment;
 	
 	@Column(name="Rating")
-    private double rating;
+    private Double rating;
 		
 	@Column(name="Date")
     private LocalDate date;
 	
 	@ManyToOne
     private User user;
-	
+
+	@ManyToOne
+	private CarService carService;
+
 	public Review() {
 		super();
 
@@ -52,7 +55,7 @@ public class Review {
 	}
 
 	
-	public double getRating() {
+	public Double getRating() {
 		return rating;
 	}
 
@@ -76,5 +79,11 @@ public class Review {
 		this.user = user;
 	}
 
-	
+	public CarService getCarService() {
+		return carService;
+	}
+
+	public void setCarService(CarService carService) {
+		this.carService = carService;
+	}
 }
