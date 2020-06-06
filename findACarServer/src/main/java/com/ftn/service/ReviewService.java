@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class ReviewService {
@@ -17,8 +18,5 @@ public class ReviewService {
         this.reviewRepository = reviewRepository;
     }
 
-    public Collection<Review> findAllByCarService(Long carServiceId){
-        return reviewRepository.findAllByCarServiceId(carServiceId);
-    }
 
 }

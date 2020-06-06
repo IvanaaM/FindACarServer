@@ -64,6 +64,7 @@ public class CarServiceService {
 		
 		List<CarService> services = carSRepository.findAll();
 		
+		
 		for(CarService c : services) {
 			if(c.getAddress().getCity().equals(searchDTO.getCity())) {
 				listForCity.add(c);

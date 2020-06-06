@@ -18,5 +18,7 @@ public class ReservationService {
 	public List<Reservation> getAllRes(){
 		return reservationRepository.findAll();
 	}
+	
+	
 
 }

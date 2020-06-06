@@ -10,5 +10,4 @@ import java.util.Collection;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review,Long> {
 
-    Collection<Review> findAllByCarServiceId(Long carServiceId);
 }

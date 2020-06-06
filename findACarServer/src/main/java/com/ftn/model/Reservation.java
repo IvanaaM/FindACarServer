@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity(name="Reservation")
 public class Reservation {
 	
@@ -21,9 +23,11 @@ public class Reservation {
 	private Vehicle vehicle;
 	
 	@Column(name="PickUpDate")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date pickUpDate;
 	
 	@Column(name="ReturnDate")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date returnDate;
 	
 	@Column(name="Price")

@@ -43,10 +43,6 @@ public class CarService {
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonIgnore
-	private Set<Review> reviews = new HashSet<Review>();
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JsonIgnore
 	private Set<Vehicle> vehicles = new HashSet<Vehicle>();
 
 	public CarService() {
@@ -100,14 +96,6 @@ public class CarService {
 
 	public void setAbout(String about) {
 		this.about = about;
-	}
-
-	public Set<Review> getReviews() {
-		return reviews;
-	}
-
-	public void setReviews(Set<Review> reviews) {
-		this.reviews = reviews;
 	}
 
 	public Set<Vehicle> getVehicles() {

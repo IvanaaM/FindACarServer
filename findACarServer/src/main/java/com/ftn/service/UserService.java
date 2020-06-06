@@ -1,10 +1,15 @@
 package com.ftn.service;
 
 import com.ftn.utils.PasswordUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftn.dto.LogInDTO;
+import com.ftn.model.Reservation;
 import com.ftn.model.User;
 import com.ftn.repository.UserRepository;
 
@@ -55,6 +60,25 @@ public class UserService {
 
     public User findByToken(String token) {
         return userRepository.findByToken(token);
+    }
+    
+    public List<Reservation> findUserReservations(String email){
+    	
+    	User u = userRepository.findByEmail(email + ".com");
+
+    	List<Reservation> res = new ArrayList<Reservation>();
+    	if(u==null) {
+    		System.out.println("error");
+    	} else {
+
+        	
+        	for(Reservation r : u.getReservations()) {
+        			res.add(r);
+        	}
+        	
+    	}
+    
+    	return res;
     }
 
 

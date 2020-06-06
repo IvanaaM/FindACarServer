@@ -1,21 +1,25 @@
 package com.ftn.model;
 
-import java.time.LocalDate;
-import java.util.Date;
+
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="Review")
 public class Review {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonIgnore
 	private long id;
 	
 	@Column(name="Comment")
@@ -25,13 +29,12 @@ public class Review {
     private Double rating;
 		
 	@Column(name="Date")
-    private LocalDate date;
+	@JsonFormat(pattern="yyyy-MM-dd")
+    private Date date;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
-	@ManyToOne
-	private CarService carService;
 
 	public Review() {
 		super();
@@ -63,11 +66,11 @@ public class Review {
 		this.rating = rating;
 	}
 
-	public LocalDate getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
@@ -79,11 +82,4 @@ public class Review {
 		this.user = user;
 	}
 
-	public CarService getCarService() {
-		return carService;
-	}
-
-	public void setCarService(CarService carService) {
-		this.carService = carService;
-	}
 }

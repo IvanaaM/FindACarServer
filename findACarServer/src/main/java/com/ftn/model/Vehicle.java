@@ -3,8 +3,10 @@ package com.ftn.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,9 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity(name="Vehicle")
 public class Vehicle {
@@ -68,9 +69,9 @@ public class Vehicle {
 	@OneToOne
 	private Pricelist pricelist;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonIgnore
-	private Set<Review> comments = new HashSet<Review>();
+	private Set<Review> reviews = new HashSet<Review>();
 	
     @Column(name="Image")
     @JsonIgnore
@@ -198,12 +199,13 @@ public class Vehicle {
 		this.mileage = mileage;
 	}
 
-	public Set<Review> getComments() {
-		return comments;
+	@JsonIgnore
+	public Set<Review> getReviwes() {
+		return reviews;
 	}
 
-	public void setComments(Set<Review> comments) {
-		this.comments = comments;
+	public void setReviews(Set<Review> reviews) {
+		this.reviews = reviews;
 	}
 
 	public double getPriceForDays() {

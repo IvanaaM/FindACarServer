@@ -1,7 +1,14 @@
 package com.ftn.controller;
 
 import com.ftn.dto.RegisterDTO;
+import com.ftn.model.Reservation;
 import com.ftn.service.AuthService;
+
+import java.util.List;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.ftn.dto.LogInDTO;
@@ -45,5 +52,13 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
     }
-
+    
+	@RequestMapping(path = "/res/{email}", method = RequestMethod.GET)
+	@ResponseBody
+    public ResponseEntity<List<Reservation>> getUserReservations(@PathVariable String email) {
+		HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+    	return new ResponseEntity<List<Reservation>>(userService.findUserReservations(email), headers, HttpStatus.OK);
+    
+    }
 }
