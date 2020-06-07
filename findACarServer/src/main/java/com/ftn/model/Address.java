@@ -28,6 +28,12 @@ public class Address {
 	
 	@Column(name="PostalCode")
 	private String postalCode;
+	
+	@Column(name="X")
+	private double x;
+	
+	@Column(name="Y")
+	private double y;
 
 	public Address() {
 		super();
@@ -72,6 +78,24 @@ public class Address {
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
+
+	public double getX() {
+		return x;
+	}
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public void setY(double y) {
+		this.y = y;
+	}
+	
+	
 	
 	
 }
