@@ -70,7 +70,6 @@ public class Vehicle {
 	private Pricelist pricelist;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JsonIgnore
 	private Set<Review> reviews = new HashSet<Review>();
 	
     @Column(name="Image")
@@ -78,12 +77,13 @@ public class Vehicle {
     private String image;
     
     @Transient
-    private String imageFile;
+    private String imageFile = image;
     // images;
 	
 
 	public Vehicle() {
 		super();
+		this.imageFile = image;
 		
 	}
 
@@ -199,7 +199,6 @@ public class Vehicle {
 		this.mileage = mileage;
 	}
 
-	@JsonIgnore
 	public Set<Review> getReviwes() {
 		return reviews;
 	}
@@ -233,6 +232,7 @@ public class Vehicle {
 	}
 
 	public String getImageFile() {
+		this.imageFile = this.image;
 		return imageFile;
 	}
 

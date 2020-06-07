@@ -122,7 +122,7 @@ public class CarServiceService {
 						vehicles.add(v);
 					} else {
 						DateTime dt3 = new DateTime(r.getPickUpDate().getTime());
-						DateTime dt4 = new DateTime(r.getRetutnDate().getTime());
+						DateTime dt4 = new DateTime(r.getReturnDate().getTime());
 
 						Interval interval = new Interval( dt1, dt2 );
 						Interval interval2 = new Interval( dt3, dt4 );

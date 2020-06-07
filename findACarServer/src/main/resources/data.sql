@@ -44,13 +44,13 @@ insert into car_service_vehicles values (1,4);
 insert into car_service_vehicles values (2,5);
 insert into car_service_vehicles values (2,6);
 
-insert into review values (1, "Super. Odlicne cene!", "2020-04-14", 4.5, 1);
+insert into review values (1, "Super. Odlicne cene!", "2020-04-14", 4.5);
 insert into vehicle_reviews values (1, 1);
 
-insert into review values (2, "Great service. I will definitely use it again!", "2020-05-20", 5, 1);
+insert into review values (2, "Great service. I will definitely use it again!", "2020-05-20", 5);
 insert into vehicle_reviews values (2, 2);
 
-insert into reservation values (1, "2020-06-08", 12000.0, "2020-06-14", 1);
+insert into reservation values (1, "2020-06-08", 12000.0, "2020-06-14",null, 1);
 insert into user_reservations values (2,1);
 
 

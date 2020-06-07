@@ -1,11 +1,10 @@
 package com.ftn.model;
 
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Review {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonIgnore
 	private long id;
 	
@@ -32,10 +31,9 @@ public class Review {
 	@JsonFormat(pattern="yyyy-MM-dd")
     private Date date;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-    private User user;
-
-
+	@ManyToOne
+	private User user;
+	
 	public Review() {
 		super();
 
@@ -74,12 +72,5 @@ public class Review {
 		this.date = date;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
 
 }
