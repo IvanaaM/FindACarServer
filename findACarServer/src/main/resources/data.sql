@@ -4,11 +4,11 @@ insert into user  (email, email_verified, first_name, last_name, password, regis
 insert into user  (email, email_verified, first_name, last_name, password, registration_date, salt, token) values ("test@test.com", true, "test", "test", "hm3IhDOhsOBGxm/Py6Ca+EMJB1vJuAHiEbmPZcz+wTo=", "2020-06-02", "FaQpklJ3xq5ojPePqItilf7SIlRe1W", NULL);
 
 
-insert into address values (1, "Novi Sad", "Serbia", "21 000", "Branka Bajica 12");
-insert into address values (2, "Novi Sad", "Serbia", "21 000", "Narodnog fronta 64");
-insert into address values (3, "Novi Sad", "Serbia", "21 000", "Rumenacka 4");
-insert into address values (4, "Beograd", "Serbia", "11 000", "Knez Mihailova 25");
-insert into address values (5, "Beograd", "Serbia", "11 000", "Knez Mihailova 87");
+insert into address values (1, "Novi Sad", "Serbia", "21 000", "Branka Bajica 12",45.257563, 19.820307);
+insert into address values (2, "Novi Sad", "Serbia", "21 000", "Narodnog fronta 64", 45.238845, 19.830443);
+insert into address values (3, "Novi Sad", "Serbia", "21 000", "Rumenacka 4", 45.263395, 19.817527);
+insert into address values (4, "Beograd", "Serbia", "11 000", "Knez Mihailova 25", 44.816957, 20.458021);
+insert into address values (5, "Beograd", "Serbia", "11 000", "Knez Mihailova 87", 44.820107, 20.453482);
 
 insert into car_service (id, about, email, name, phone, address_id, landline_phone) values (1, "Rent a Car NS agency based in Novi Sad has an excellent ratio of price and quality of vehicles. We offer you rental of new cars with complete equipment at extremely favorable rental conditions. We guarantee: professionalism, reliability, safety", "rcarNS@gmail.com", "Rent a Car NS", "+38121447389", 1, "011/3298-448");
 insert into car_service (id, about, email, name, phone, address_id, landline_phone) values (2, "NS Renting Cars agency based in Novi Sad has an excellent ratio of price and quality of vehicles. We guarantee: professionalism, reliability, safety", "nsrentingcar@gmail.com", "NS Renting Cars", "+38121831664", 2, "011/3298-448");
