@@ -28,4 +28,12 @@ public class VehicleService {
 		return reviews;
 	}
 
+	public Vehicle findById(Long id){
+		Vehicle vehicle = null;
+		if (vehicleRepository.findById(id).isPresent()) {
+			vehicle = vehicleRepository.findById(id).get();
+		}
+		return vehicle;
+	}
+
 }

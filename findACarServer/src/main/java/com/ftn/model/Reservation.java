@@ -6,122 +6,141 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ftn.dto.CreateReservationDTO;
 
-@Entity(name="Reservation")
+@Entity(name = "Reservation")
 public class Reservation implements Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Vehicle vehicle;
-	
-	@Column(name="PickUpDate")
-	@JsonFormat(pattern="yyyy-MM-dd")
-	private Date pickUpDate;
-	
-	@Column(name="ReturnDate")
-	@JsonFormat(pattern="yyyy-MM-dd")
-	private Date returnDate;
-	
-	@Column(name="Price")
-	private double price;
-	
-	@OneToOne
-	private Review review;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	public Reservation() {
-		super();
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-	}
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Vehicle vehicle;
 
-	public long getId() {
-		return id;
-	}
+    @Column(name = "PickUpDate")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date pickUpDate;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    @Column(name = "ReturnDate")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date returnDate;
 
-	public Vehicle getVehicle() {
-		return vehicle;
-	}
+    @Column(name = "Price")
+    private double price;
 
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
-	}
+    @OneToOne
+    private Review review;
 
-	public Date getPickUpDate() {
-		pickUpDate = setDate(pickUpDate);
-		return pickUpDate;
-	}
+    @ManyToMany
+    private Set<AdditionalService> includedAdditionalServices = new HashSet<>();
 
-	public void setPickUpDate(Date pickUpDate) {
-		this.pickUpDate = pickUpDate;
-	}
+    public Reservation() {
+        super();
 
-	public double getPrice() {
-		return price;
-	}
+    }
 
-	public void setPrice(double price) {
-		this.price = price;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public Date getReturnDate() {
-		returnDate = setDate(returnDate);
-		return returnDate;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setReturnDate(Date returnDate) {
-		this.returnDate = returnDate;
-	}
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
 
-	public Review getReview() {
-		return review;
-	}
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
 
-	public void setReview(Review review) {
-		this.review = review;
-	}
-	
-	public Date setDate(Date date2) {
-		String pattern = "yyyy-MM-dd HH:mm:ss";
+    public Date getPickUpDate() {
+        pickUpDate = setDate(pickUpDate);
+        return pickUpDate;
+    }
 
-		DateFormat df = new SimpleDateFormat(pattern);
-		String date = df.format(date2);
-		Calendar c = Calendar.getInstance();
-		try {
-			c.setTime(df.parse(date));
-			c.add(Calendar.DAY_OF_MONTH, 1);
-			String newDate = df.format(c.getTime()); 
-			date2 = df.parse(newDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-		return date2;
-	}
-	
-	
-	
+    public void setPickUpDate(Date pickUpDate) {
+        this.pickUpDate = pickUpDate;
+    }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Date getReturnDate() {
+        returnDate = setDate(returnDate);
+        return returnDate;
+    }
+
+    public void setReturnDate(Date returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public Review getReview() {
+        return review;
+    }
+
+    public void setReview(Review review) {
+        this.review = review;
+    }
+
+    public Date setDate(Date date2) {
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+
+        DateFormat df = new SimpleDateFormat(pattern);
+        String date = df.format(date2);
+        Calendar c = Calendar.getInstance();
+        try {
+            c.setTime(df.parse(date));
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            String newDate = df.format(c.getTime());
+            date2 = df.parse(newDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return date2;
+    }
+
+
+    public Set<AdditionalService> getIncludedAdditionalServices() {
+        return includedAdditionalServices;
+    }
+
+    public void setIncludedAdditionalServices(Set<AdditionalService> includedAdditionalServices) {
+        this.includedAdditionalServices = includedAdditionalServices;
+    }
+
+    public Reservation(CreateReservationDTO dto, Set<AdditionalService> includedAdditionalServices, Vehicle vehicle) {
+        this.vehicle = vehicle;
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        DateFormat dateFormat = new SimpleDateFormat(pattern);
+        try {
+            this.pickUpDate = dateFormat.parse(dto.getPickUpDate());
+            this.returnDate = dateFormat.parse(dto.getReturnDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        this.price = dto.getPrice();
+        this.includedAdditionalServices = includedAdditionalServices;
+
+    }
 }

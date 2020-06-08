@@ -6,6 +6,7 @@ import com.ftn.service.AuthService;
 
 import java.util.List;
 
+import com.ftn.service.ReservationService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,10 +21,12 @@ public class UserController {
 
     UserService userService;
     AuthService authService;
+    private ReservationService reservationService;
 
-    public UserController(UserService userService, AuthService authService) {
+    public UserController(UserService userService, AuthService authService, ReservationService reservationService) {
         this.userService = userService;
         this.authService = authService;
+        this.reservationService = reservationService;
     }
 
     @PostMapping(path = "/logIn", produces = "application/json; charset=UTF-8")
@@ -58,7 +61,7 @@ public class UserController {
     public ResponseEntity<List<Reservation>> getUserReservations(@PathVariable String email) {
 		HttpHeaders headers = new HttpHeaders();
 	    headers.setContentType(MediaType.APPLICATION_JSON);
-    	return new ResponseEntity<List<Reservation>>(userService.findUserReservations(email), headers, HttpStatus.OK);
+    	return new ResponseEntity<List<Reservation>>(reservationService.findUserReservations(email), headers, HttpStatus.OK);
     
     }
 	
@@ -67,7 +70,7 @@ public class UserController {
     public ResponseEntity<Boolean> removeRes(@PathVariable long id) {
 		HttpHeaders headers = new HttpHeaders();
 	    headers.setContentType(MediaType.APPLICATION_JSON);
-	    userService.removeReservation(id);
+        reservationService.removeReservation(id);
     	return new ResponseEntity<Boolean>(true, headers, HttpStatus.OK);
     
     }

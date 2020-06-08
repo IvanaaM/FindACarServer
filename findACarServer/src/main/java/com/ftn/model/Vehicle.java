@@ -4,16 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -88,6 +79,9 @@ public class Vehicle implements Serializable {
     
 	@Column(name="Cancel")
 	private int cancel;
+
+	@ManyToMany
+	private Set<AdditionalService> additionalServices = new HashSet<>();
 
 	public Vehicle() {
 		super();
@@ -259,6 +253,12 @@ public class Vehicle implements Serializable {
 	public Set<Review> getReviews() {
 		return reviews;
 	}
-	
-	
+
+	public Set<AdditionalService> getAdditionalServices() {
+		return additionalServices;
+	}
+
+	public void setAdditionalServices(Set<AdditionalService> additionalServices) {
+		this.additionalServices = additionalServices;
+	}
 }

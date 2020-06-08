@@ -22,9 +22,6 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
-    
-    @Autowired
-    ReservationService resService;
 
     public boolean logIn(LogInDTO userDTO) {
         boolean success = false;
@@ -68,41 +65,10 @@ public class UserService {
     public User findByToken(String token) {
         return userRepository.findByToken(token);
     }
-    
-    public List<Reservation> findUserReservations(String email){
-    	
-    	User u = userRepository.findByEmail(email + ".com");
-    	
-    	List<Reservation> res = new ArrayList<Reservation>();
-    	if(u==null) {
-    		System.out.println("error");
-    	} else {
-        	
-        	for(Reservation r : u.getReservations()) {
-        			res.add(r);
-        	}
-        	
-    	}
-    	
-    	Collections.sort(res, new SortRes());
-    	return res;
+
+	public User findByEmail(String email){
+        return userRepository.findByEmail(email);
     }
-    
-    public class SortRes implements Comparator<Reservation>
-	{
-
-		@Override
-		public int compare(Reservation o1, Reservation o2) {
-
-			return (int) (o1.getId() - o2.getId());
-		}
-	}
-
-	public void removeReservation(long id) {
-
-		resService.reservationRepository.deleteById(id);
-		
-	}
 
 
 }
