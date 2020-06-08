@@ -41,6 +41,7 @@ public class CarService {
 	@Column(name="About")
 	private String about;
 	
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonIgnore
 	private Set<Vehicle> vehicles = new HashSet<Vehicle>();
@@ -113,5 +114,6 @@ public class CarService {
 	public void setLandlinePhone(String landlinePhone) {
 		this.landlinePhone = landlinePhone;
 	}
+	
 
 }

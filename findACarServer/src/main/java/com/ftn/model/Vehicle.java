@@ -1,5 +1,6 @@
 package com.ftn.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,8 +19,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity(name="Vehicle")
-public class Vehicle {
+public class Vehicle implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -79,7 +85,9 @@ public class Vehicle {
     @Transient
     private String imageFile = image;
     // images;
-	
+    
+	@Column(name="Cancel")
+	private int cancel;
 
 	public Vehicle() {
 		super();
@@ -240,6 +248,17 @@ public class Vehicle {
 		this.imageFile = imageFile;
 	}
 
+	public int getCancel() {
+		return cancel;
+	}
+
+	public void setCancel(int cancel) {
+		this.cancel = cancel;
+	}
+
+	public Set<Review> getReviews() {
+		return reviews;
+	}
 	
 	
 }

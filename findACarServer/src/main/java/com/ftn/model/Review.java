@@ -1,6 +1,7 @@
 package com.ftn.model;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,8 +15,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="Review")
-public class Review {
+public class Review implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonIgnore
@@ -25,7 +31,7 @@ public class Review {
 	private String comment;
 	
 	@Column(name="Rating")
-    private Double rating;
+    private float rating;
 		
 	@Column(name="Date")
 	@JsonFormat(pattern="yyyy-MM-dd")
@@ -55,12 +61,11 @@ public class Review {
 		this.comment = comment;
 	}
 
-	
-	public Double getRating() {
+	public float getRating() {
 		return rating;
 	}
 
-	public void setRating(double rating) {
+	public void setRating(float rating) {
 		this.rating = rating;
 	}
 
@@ -71,6 +76,15 @@ public class Review {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 
 
 }

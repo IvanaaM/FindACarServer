@@ -13,6 +13,8 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -71,6 +73,7 @@ public class CarServiceService {
 			}
 		}
 		
+		Collections.sort(listForCity, new SortCarService());
 		
 		return listForCity;
 		
@@ -139,6 +142,7 @@ public class CarServiceService {
 			}
 		}
 		
+		Collections.sort(vehicles, new SortVehicles());
 		return vehicles;
 	}
 	
@@ -156,6 +160,27 @@ public class CarServiceService {
 	        return null;
 	    }
 	}
+	
+	public class SortCarService implements Comparator<CarService>
+	{
+
+		@Override
+		public int compare(CarService o1, CarService o2) {
+
+			return (int) (o1.getId() - o2.getId());
+		}
+	}
+	
+	public class SortVehicles implements Comparator<Vehicle>
+	{
+
+		@Override
+		public int compare(Vehicle o1, Vehicle o2) {
+
+			return (int) (o1.getId() - o2.getId());
+		}
+	}
+
 
 
 }

@@ -37,13 +37,16 @@ public class ReviewService {
 		
 		Review review = new Review();
 		review.setComment(reviewDTO.getComment());
-		review.setRating(Double.parseDouble(reviewDTO.getRating()));
+		review.setRating(Float.parseFloat(reviewDTO.getRating()));
 		review.setDate(new Date());
+		review.setUser(u);
 		
 		Review rev = reviewRepository.save(review);
 		
 		r.setReview(rev);
 		r.getVehicle().getReviwes().add(rev);
+		
+		reservationService.reservationRepository.save(r);
 		
 	}
 

@@ -1,5 +1,10 @@
 package com.ftn.model;
 
+import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -15,8 +20,13 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity(name="Reservation")
-public class Reservation {
+public class Reservation implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -60,6 +70,7 @@ public class Reservation {
 	}
 
 	public Date getPickUpDate() {
+		pickUpDate = setDate(pickUpDate);
 		return pickUpDate;
 	}
 
@@ -76,6 +87,7 @@ public class Reservation {
 	}
 
 	public Date getReturnDate() {
+		returnDate = setDate(returnDate);
 		return returnDate;
 	}
 
@@ -91,6 +103,23 @@ public class Reservation {
 		this.review = review;
 	}
 	
+	public Date setDate(Date date2) {
+		String pattern = "yyyy-MM-dd HH:mm:ss";
+
+		DateFormat df = new SimpleDateFormat(pattern);
+		String date = df.format(date2);
+		Calendar c = Calendar.getInstance();
+		try {
+			c.setTime(df.parse(date));
+			c.add(Calendar.DAY_OF_MONTH, 1);
+			String newDate = df.format(c.getTime()); 
+			date2 = df.parse(newDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return date2;
+	}
 	
 	
 	

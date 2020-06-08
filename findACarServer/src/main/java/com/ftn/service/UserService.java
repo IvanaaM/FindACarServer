@@ -3,6 +3,8 @@ package com.ftn.service;
 import com.ftn.utils.PasswordUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,9 @@ import org.springframework.stereotype.Service;
 import com.ftn.dto.LogInDTO;
 import com.ftn.model.Reservation;
 import com.ftn.model.User;
+import com.ftn.model.Vehicle;
 import com.ftn.repository.UserRepository;
+import com.ftn.service.CarServiceService.SortVehicles;
 
 @Service
 public class UserService {
@@ -65,21 +69,31 @@ public class UserService {
     public List<Reservation> findUserReservations(String email){
     	
     	User u = userRepository.findByEmail(email + ".com");
-
+    	
     	List<Reservation> res = new ArrayList<Reservation>();
     	if(u==null) {
     		System.out.println("error");
     	} else {
-
         	
         	for(Reservation r : u.getReservations()) {
         			res.add(r);
         	}
         	
     	}
-    
+    	
+    	Collections.sort(res, new SortRes());
     	return res;
     }
+    
+    public class SortRes implements Comparator<Reservation>
+	{
+
+		@Override
+		public int compare(Reservation o1, Reservation o2) {
+
+			return (int) (o1.getId() - o2.getId());
+		}
+	}
 
 
 }
