@@ -75,7 +75,7 @@ public class Vehicle implements Serializable {
 	@OneToOne
 	private Pricelist pricelist;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany
 	private Set<Review> reviews = new HashSet<Review>();
 	
     @Column(name="Image")
@@ -84,7 +84,9 @@ public class Vehicle implements Serializable {
     
     @Transient
     private String imageFile = image;
-    // images;
+    
+    @OneToMany
+    private Set<VehiclePhoto> vehiclePhotos = new HashSet<VehiclePhoto>();
     
 	@Column(name="Cancel")
 	private int cancel;
@@ -256,9 +258,20 @@ public class Vehicle implements Serializable {
 		this.cancel = cancel;
 	}
 
+	@JsonIgnore
 	public Set<Review> getReviews() {
 		return reviews;
 	}
+
+	public Set<VehiclePhoto> getVehiclePhotos() {
+		return vehiclePhotos;
+	}
+
+	public void setVehiclePhotos(Set<VehiclePhoto> vehiclePhotos) {
+		this.vehiclePhotos = vehiclePhotos;
+	}
+	
+	
 	
 	
 }
