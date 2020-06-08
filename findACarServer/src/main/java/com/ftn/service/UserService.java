@@ -22,6 +22,9 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+    
+    @Autowired
+    ReservationService resService;
 
     public boolean logIn(LogInDTO userDTO) {
         boolean success = false;
@@ -93,6 +96,12 @@ public class UserService {
 
 			return (int) (o1.getId() - o2.getId());
 		}
+	}
+
+	public void removeReservation(long id) {
+
+		resService.reservationRepository.deleteById(id);
+		
 	}
 
 

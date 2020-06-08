@@ -61,4 +61,14 @@ public class UserController {
     	return new ResponseEntity<List<Reservation>>(userService.findUserReservations(email), headers, HttpStatus.OK);
     
     }
+	
+	@RequestMapping(path = "/res/cancelRes/{id}", method = RequestMethod.GET)
+	@ResponseBody
+    public ResponseEntity<Boolean> removeRes(@PathVariable long id) {
+		HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    userService.removeReservation(id);
+    	return new ResponseEntity<Boolean>(true, headers, HttpStatus.OK);
+    
+    }
 }
