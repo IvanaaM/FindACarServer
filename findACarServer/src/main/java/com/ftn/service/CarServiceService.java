@@ -45,6 +45,7 @@ import com.ftn.model.Address;
 import com.ftn.model.CarService;
 import com.ftn.model.Reservation;
 import com.ftn.model.Vehicle;
+import com.ftn.model.VehiclePhoto;
 import com.ftn.repository.AddressRepository;
 import com.ftn.repository.CarServiceRepository;
 
@@ -83,7 +84,7 @@ public class CarServiceService {
 	public List<Vehicle> getVehicles(SearchVehiclesDTO svDTO) {
 		
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 	    Date firstDate = new Date();
 	    Date secondDate = new Date();
 	    
@@ -97,6 +98,7 @@ public class CarServiceService {
 		
 		DateTime dt1 = new DateTime(firstDate.getTime());
 		DateTime dt2 = new DateTime(secondDate.getTime());
+		
 	 
 	    long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
 	    
@@ -107,8 +109,12 @@ public class CarServiceService {
 		
 		CarService cs = carSRepository.findById(svDTO.getId()).get();
 		
+		boolean free = true;
+		
 		for(Vehicle v : cs.getVehicles()) {
 			
+		
+			free = true;
 		
 				//byte[] fileContent = FileUtils.readFileToByteArray(new File(v.getImage()));
 				//String encodedString = Base64.getEncoder().encodeToString(fileContent);
@@ -119,30 +125,35 @@ public class CarServiceService {
 		
 			
 			v.setPriceForDays(v.getPricelist().getPriceADay()*days);
-			if(reservations.size() !=0) {
+
 				for(Reservation r : reservations) {
 					if(r.getVehicle() != v) {
-						vehicles.add(v);
+						//continue;
+						//vehicles.add(v);
 					} else {
+					
 						DateTime dt3 = new DateTime(r.getPickUpDate().getTime());
 						DateTime dt4 = new DateTime(r.getReturnDate().getTime());
 
 						Interval interval = new Interval( dt1, dt2 );
 						Interval interval2 = new Interval( dt3, dt4 );
 						
-						if(!interval.overlaps(interval2)) {
-							vehicles.add(v);
+						if(interval.overlaps(interval2)) {
+							free = false;
+							break; // nasao poklapanje za dato vozilo u rezervacijama
 						}
 						
 					}
 				}
 				
-			} else {
-				vehicles.add(v);
-			}
+				if(free) {
+					vehicles.add(v);
+				}
+			
 		}
 		
 		Collections.sort(vehicles, new SortVehicles());
+		System.out.println(vehicles.size());
 		return vehicles;
 	}
 	
@@ -180,7 +191,6 @@ public class CarServiceService {
 			return (int) (o1.getId() - o2.getId());
 		}
 	}
-
-
+	
 
 }
