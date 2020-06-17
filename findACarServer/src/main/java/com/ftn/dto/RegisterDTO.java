@@ -7,7 +7,10 @@ public class RegisterDTO {
     private String password;
     private String confirmPassword;
 
-    public RegisterDTO(String email, String name, String surname, String password) {
+	public RegisterDTO() {
+	}
+
+	public RegisterDTO(String email, String name, String surname, String password) {
         this.email = email;
         this.name = name;
         this.surname = surname;

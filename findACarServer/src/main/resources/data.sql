@@ -1,7 +1,7 @@
 -- sifra je admin
-insert into user  (email, email_verified, first_name, last_name, password, registration_date, salt, token) values ("marko@mailinator.com", true , "Marko", "Markovic", "ORY3tic/hPfVpVk+bzsAFxgjIEXPNVUVvFEJzpHYWcs=", "2020-05-20", "fD5EfEJiiyj4SRuyVC70bu5rxUtlVC", NULL );
+insert into user  (email, email_verified, first_name, last_name, password, registration_date, salt, token, fcm_token) values ("marko@mailinator.com", true , "Marko", "Markovic", "ORY3tic/hPfVpVk+bzsAFxgjIEXPNVUVvFEJzpHYWcs=", "2020-05-20", "fD5EfEJiiyj4SRuyVC70bu5rxUtlVC", NULL, NULL);
 --sifra je 12345
-insert into user  (email, email_verified, first_name, last_name, password, registration_date, salt, token) values ("marko@gmail.com", true, "Marko", "Markovic", "hm3IhDOhsOBGxm/Py6Ca+EMJB1vJuAHiEbmPZcz+wTo=", "2020-06-02", "FaQpklJ3xq5ojPePqItilf7SIlRe1W", NULL);
+insert into user  (email, email_verified, first_name, last_name, password, registration_date, salt, token, fcm_token) values ("marko@gmail.com", true, "Marko", "Markovic", "hm3IhDOhsOBGxm/Py6Ca+EMJB1vJuAHiEbmPZcz+wTo=", "2020-06-02", "FaQpklJ3xq5ojPePqItilf7SIlRe1W", NULL, null );
 
 
 insert into address values (1, "Novi Sad", "Serbia", "21 000", "Branka Bajica 12",45.257563, 19.820307);

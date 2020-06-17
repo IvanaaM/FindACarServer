@@ -57,6 +57,9 @@ public class User implements Serializable {
     @JsonIgnore
     private Set<Reservation> reservations = new HashSet<Reservation>();
 
+    @Column
+    private String fcmToken;
+
     public User() {
         super();
     }
@@ -151,5 +154,11 @@ public class User implements Serializable {
         this.reservations = reservations;
     }
 
+    public String getFcmToken() {
+        return fcmToken;
+    }
 
+    public void setFcmToken(String fcmToken) {
+        this.fcmToken = fcmToken;
+    }
 }

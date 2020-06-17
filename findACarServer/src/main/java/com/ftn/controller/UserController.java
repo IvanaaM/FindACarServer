@@ -55,23 +55,32 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
     }
-    
-	@RequestMapping(path = "/res/{email}", method = RequestMethod.GET)
-	@ResponseBody
+
+    @RequestMapping(path = "/res/{email}", method = RequestMethod.GET)
+    @ResponseBody
     public ResponseEntity<List<Reservation>> getUserReservations(@PathVariable String email) {
-		HttpHeaders headers = new HttpHeaders();
-	    headers.setContentType(MediaType.APPLICATION_JSON);
-    	return new ResponseEntity<List<Reservation>>(reservationService.findUserReservations(email), headers, HttpStatus.OK);
-    
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<List<Reservation>>(reservationService.findUserReservations(email), headers, HttpStatus.OK);
+
     }
-	
-	@RequestMapping(path = "/res/cancelRes/{id}", method = RequestMethod.GET)
-	@ResponseBody
+
+    @RequestMapping(path = "/res/cancelRes/{id}", method = RequestMethod.GET)
+    @ResponseBody
     public ResponseEntity<Boolean> removeRes(@PathVariable long id) {
-		HttpHeaders headers = new HttpHeaders();
-	    headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
         reservationService.removeReservation(id);
-    	return new ResponseEntity<Boolean>(true, headers, HttpStatus.OK);
-    
+        return new ResponseEntity<Boolean>(true, headers, HttpStatus.OK);
+
+    }
+
+    @PutMapping("/{email}/{fcmToken}")
+    public ResponseEntity<Void> registerUserDevice(@PathVariable String email, @PathVariable String fcmToken) {
+        if (userService.registerUserDevice(email, fcmToken)) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 }

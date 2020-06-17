@@ -66,9 +66,21 @@ public class UserService {
         return userRepository.findByToken(token);
     }
 
-	public User findByEmail(String email){
+    public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
+    public boolean registerUserDevice(String email, String fcmToken) {
+        boolean success = false;
+        if (email != null && fcmToken != null) {
+            User user = userRepository.findByEmail(email);
+            if (user.getFcmToken() == null) {
+                user.setFcmToken(fcmToken);
+                userRepository.save(user);
+                success = true;
+            }
+        }
+        return success;
+    }
 
 }
