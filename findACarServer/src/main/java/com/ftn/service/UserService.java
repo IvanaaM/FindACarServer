@@ -74,11 +74,9 @@ public class UserService {
         boolean success = false;
         if (email != null && fcmToken != null) {
             User user = userRepository.findByEmail(email);
-            if (user.getFcmToken() == null) {
                 user.setFcmToken(fcmToken);
                 userRepository.save(user);
                 success = true;
-            }
         }
         return success;
     }
