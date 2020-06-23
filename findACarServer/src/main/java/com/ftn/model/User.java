@@ -56,6 +56,10 @@ public class User implements Serializable {
     @OneToMany
     @JsonIgnore
     private Set<Reservation> reservations = new HashSet<Reservation>();
+    
+    @OneToMany
+    @JsonIgnore
+    private Set<Vehicle> favorites = new HashSet<Vehicle>();
 
     @Column
     private String fcmToken;
@@ -161,4 +165,14 @@ public class User implements Serializable {
     public void setFcmToken(String fcmToken) {
         this.fcmToken = fcmToken;
     }
+
+	public Set<Vehicle> getFavorites() {
+		return favorites;
+	}
+
+	public void setFavorites(Set<Vehicle> favorites) {
+		this.favorites = favorites;
+	}
+    
+    
 }

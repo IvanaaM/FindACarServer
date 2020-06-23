@@ -20,21 +20,21 @@ insert into pricelist values (1, 2000, 2020);
 insert into pricelist values (2, 2000, 2020);
 insert into pricelist values (3, 3200, 2020);
 
-insert into vehicle values (1, 1, 1, 1, 2, 0, "Description", 4, "Petrol","reno_clio_1.jpg",  "Unlimited","Renault Clio 5", 2017, "20/06/2021", 5, "Economy",1);
+insert into vehicle values (1, 1, 1, 1, 2, 0, "Description", 4, "Petrol","reno_clio_1.jpg",  "Unlimited","Renault Clio 5", 2017, "20/06/2021", 5, "Economy",0,1);
 
-insert into vehicle values (2, 1, 0, 1, 2, 0, "Description", 5, "Petrol","ford_fiesta_1.jpg",  "Unlimited", "Ford fiesta", 2015, "12/02/2021", 5, "Medium", 2);
+insert into vehicle values (2, 1, 0, 1, 2, 0, "Description", 5, "Petrol","ford_fiesta_1.jpg",  "Unlimited", "Ford fiesta", 2015, "12/02/2021", 5, "Medium",0, 2);
 
-insert into vehicle values (3, 1, 0, 1, 5, 0, "Description", 5, "Diesel","nissan_2.jpg",  "Unlimited", "Nissan Qashqai", 2017, "04/11/2020", 5, "Large", 3);
+insert into vehicle values (3, 1, 0, 1, 5, 0, "Description", 5, "Diesel","nissan_2.jpg",  "Unlimited", "Nissan Qashqai", 2017, "04/11/2020", 5, "Large",0,3);
 
 
 insert into pricelist values (4, 2500, 2020);
 insert into pricelist values (5, 1900, 2020);
 insert into pricelist values (6, 1700, 2020);
-insert into vehicle values (4, 1, 0, 1, 2, 0, "Description", 5, "Petrol", "renault_megan.jpg", "Unlimited", "Renault Megan 4", 2013, "18/10/2020", 5, "Economy", 4);
+insert into vehicle values (4, 1, 0, 1, 2, 0, "Description", 5, "Petrol", "renault_megan.jpg", "Unlimited", "Renault Megan 4", 2013, "18/10/2020", 5, "Economy", 0,4);
 
-insert into vehicle values (5, 1, 0, 2, 5, 0, "Description", 5, "Diesel","citroen_c3.jpg", "Unlimited", "Citroen C3", 2015, "10/05/2021", 5, "Medium", 5);
+insert into vehicle values (5, 1, 0, 2, 5, 0, "Description", 5, "Diesel","citroen_c3.jpg", "Unlimited", "Citroen C3", 2015, "10/05/2021", 5, "Medium", 0,5);
 
-insert into vehicle values (6, 1, 0, 1, 5, 0, "Description", 5, "Petrol","renault_twingo.jpg", "Unlimited", "Renault Twingo", 2016, "12/06/2021", 4, "Medium", 6);
+insert into vehicle values (6, 1, 0, 1, 5, 0, "Description", 5, "Petrol","renault_twingo.jpg", "Unlimited", "Renault Twingo", 2016, "12/06/2021", 4, "Medium", 0,6);
 
 
 insert into car_service_vehicles values (1,1);

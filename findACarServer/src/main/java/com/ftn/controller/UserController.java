@@ -2,6 +2,7 @@ package com.ftn.controller;
 
 import com.ftn.dto.RegisterDTO;
 import com.ftn.model.Reservation;
+import com.ftn.model.Vehicle;
 import com.ftn.service.AuthService;
 
 import java.util.List;
@@ -82,5 +83,14 @@ public class UserController {
         } else {
             return ResponseEntity.badRequest().build();
         }
+    }
+    
+    @PostMapping("/addFavorite/{email}/{idVehicle}")
+    public ResponseEntity<Void> addToFavorites(@PathVariable String email, @PathVariable long idVehicle){
+    	
+    	userService.addFavorite(email,idVehicle);
+    	
+    	return ResponseEntity.ok().build();
+    	
     }
 }

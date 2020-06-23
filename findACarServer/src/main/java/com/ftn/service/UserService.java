@@ -15,6 +15,7 @@ import com.ftn.model.Reservation;
 import com.ftn.model.User;
 import com.ftn.model.Vehicle;
 import com.ftn.repository.UserRepository;
+import com.ftn.repository.VehicleRepository;
 import com.ftn.service.CarServiceService.SortVehicles;
 
 @Service
@@ -22,6 +23,9 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+    
+    @Autowired
+    VehicleRepository vehicleRepository;
 
     public boolean logIn(LogInDTO userDTO) {
         boolean success = false;
@@ -82,5 +86,16 @@ public class UserService {
         }
         return success;
     }
+
+	public void addFavorite(String email, long idVehicle) {
+		
+		User u = userRepository.findByEmail(email);
+		Vehicle vehicle = vehicleRepository.findById(idVehicle).get();
+		
+		u.getFavorites().add(vehicle);
+		System.out.println("uoa");
+		userRepository.save(u);
+		
+	}
 
 }

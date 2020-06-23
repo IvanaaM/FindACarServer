@@ -84,6 +84,12 @@ public class Vehicle implements Serializable {
 
 	@ManyToMany
 	private Set<AdditionalService> additionalServices = new HashSet<>();
+	
+
+	@Version
+	@Column(name="Version")
+	private long version;
+	
 
 	public Vehicle() {
 		super();
