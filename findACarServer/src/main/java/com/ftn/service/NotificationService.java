@@ -54,7 +54,7 @@ public class NotificationService {
         }
 
     }
-    @Scheduled(fixedRate = 35000)
+    //@Scheduled(fixedRate = 35000)
     public void sendFirebaseNotif(){
         PushNotificationRequest request = new PushNotificationRequest("Tittle", "Message body",
                 "clFxY_cvFPg:APA91bE2F21nc-MqD0xsVpL8ZECJ20ke_aGvUPbkI6FDH7HShlLpSobpV_9tJBemef44HEfcqjBbSyQdsaXo3MdTbQwCaUuwI8ydySxzJh9WNqBIbzVHL0hjp6IFur0g5iHcc3AVQags", "topic");
