@@ -52,7 +52,7 @@ public class User implements Serializable {
     @JsonIgnore
     private Set<Reservation> reservations = new HashSet<Reservation>();
     
-    @OneToMany
+    @ManyToMany
     private Set<Vehicle> favorites = new HashSet<Vehicle>();
 
     @Column
