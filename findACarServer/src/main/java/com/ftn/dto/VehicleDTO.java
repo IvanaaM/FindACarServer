@@ -2,9 +2,12 @@ package com.ftn.dto;
 
 import java.util.List;
 
-public class VehicleDTO {
-    private long vehicleId;
+import com.ftn.model.Pricelist;
+import com.ftn.model.VehiclePhoto;
 
+public class VehicleDTO {
+	
+    private long vehicleId;
     private long id;
     private String name;
     private String description;
@@ -20,10 +23,13 @@ public class VehicleDTO {
     private boolean deposit;
     private String mileage;
     private double priceForDays;
+    private Pricelist pricelist;
     private String imageFile;
-    private String imagePath;
+    private String image;
+    private List<VehiclePhoto> vehiclePhotos;
     private int cancel;
     private List<ReviewDTO> reviews;
+    private long version;
 
     public VehicleDTO() {
     }
@@ -164,12 +170,12 @@ public class VehicleDTO {
         this.imageFile = imageFile;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public String getImage() {
+        return image;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public int getCancel() {
@@ -187,4 +193,30 @@ public class VehicleDTO {
     public void setReviews(List<ReviewDTO> reviews) {
         this.reviews = reviews;
     }
+
+	public Pricelist getPricelist() {
+		return pricelist;
+	}
+
+	public void setPricelist(Pricelist pricelist) {
+		this.pricelist = pricelist;
+	}
+
+	public List<VehiclePhoto> getVehiclePhotos() {
+		return vehiclePhotos;
+	}
+
+	public void setVehiclePhotos(List<VehiclePhoto> vehiclePhotos) {
+		this.vehiclePhotos = vehiclePhotos;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
+	}
+    
+    
 }

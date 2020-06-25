@@ -1,100 +1,74 @@
-package com.ftn.model;
+package com.ftn.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-@Entity(name="Address")
-public class Address {
+public class AddressDTO {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	@Column(name="Street")
 	private String street;
-	
-	@Column(name="City")
 	private String city;
-	
-	@Column(name="Country")
 	private String country;
-	
-	@Column(name="PostalCode")
 	private String postalCode;
-	
-	@Column(name="X")
 	private double x;
-	
-	@Column(name="Y")
 	private double y;
-
-	public Address() {
+	
+	
+	public AddressDTO() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-
+	public AddressDTO(long id, String street, String city, String country, String postalCode, double x, double y) {
+		super();
+		this.id = id;
+		this.street = street;
+		this.city = city;
+		this.country = country;
+		this.postalCode = postalCode;
+		this.x = x;
+		this.y = y;
+	}
+	
 	public long getId() {
 		return id;
 	}
-
 	public void setId(long id) {
 		this.id = id;
 	}
-
 	public String getStreet() {
 		return street;
 	}
-
 	public void setStreet(String street) {
 		this.street = street;
 	}
-
 	public String getCity() {
 		return city;
 	}
-
 	public void setCity(String city) {
 		this.city = city;
 	}
-
 	public String getCountry() {
 		return country;
 	}
-
 	public void setCountry(String country) {
 		this.country = country;
 	}
-
 	public String getPostalCode() {
 		return postalCode;
 	}
-
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
-
 	public double getX() {
 		return x;
 	}
-
 	public void setX(double x) {
 		this.x = x;
 	}
-
 	public double getY() {
 		return y;
 	}
-
 	public void setY(double y) {
 		this.y = y;
 	}
 	
 	
-	
-	
+
 }

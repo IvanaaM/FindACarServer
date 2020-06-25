@@ -1,9 +1,6 @@
 package com.ftn.dto;
 
-import java.util.List;
-
 import com.ftn.model.Address;
-import com.ftn.model.Vehicle;
 
 public class CarServiceDTO {
 	
@@ -14,15 +11,13 @@ public class CarServiceDTO {
 	private String email;
 	private Address address;
 	private String about;
-	private List<Vehicle> vehicles;
-	
 	
 	public CarServiceDTO() {
 		super();
 	}
 	
 	public CarServiceDTO(long id, String name, String phone, String landlinePhone, String email, Address address,
-			String about, List<Vehicle> vehicles) {
+			String about) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -31,7 +26,6 @@ public class CarServiceDTO {
 		this.email = email;
 		this.address = address;
 		this.about = about;
-		this.vehicles = vehicles;
 	}
 	public long getId() {
 		return id;
@@ -75,14 +69,5 @@ public class CarServiceDTO {
 	public void setAbout(String about) {
 		this.about = about;
 	}
-	public List<Vehicle> getVehicles() {
-		return vehicles;
-	}
-	public void setVehicles(List<Vehicle> vehicles) {
-		this.vehicles = vehicles;
-	}
-	
-	
-	
 
 }

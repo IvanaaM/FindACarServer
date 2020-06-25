@@ -1,6 +1,6 @@
 package com.ftn.service;
 
-import com.ftn.dto.ReviewDTO;
+import com.ftn.dto.CreateReviewDTO;
 import com.ftn.model.Reservation;
 import com.ftn.model.Review;
 import com.ftn.model.User;
@@ -29,7 +29,7 @@ public class ReviewService {
         this.reviewRepository = reviewRepository;
     }
 
-	public void addReview(ReviewDTO reviewDTO) {
+	public void addReview(CreateReviewDTO reviewDTO) {
 
 		User u = userService.userRepository.findByEmail(reviewDTO.getEmail());
 		

@@ -1,7 +1,7 @@
 package com.ftn.controller;
 
 import com.ftn.dto.RegisterDTO;
-import com.ftn.dto.ReviewDTO;
+import com.ftn.dto.CreateReviewDTO;
 import com.ftn.model.Review;
 import com.ftn.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class ReviewController {
     }
     
     @PostMapping("/add")
-    public ResponseEntity<Void> register(@RequestBody ReviewDTO reviewDTO) {
+    public ResponseEntity<Void> register(@RequestBody CreateReviewDTO reviewDTO) {
 
         reviewService.addReview(reviewDTO);
         
