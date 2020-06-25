@@ -1,12 +1,12 @@
 package com.ftn.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ftn.dto.VehicleDTO;
 
 
 @Entity(name="Vehicle")
@@ -279,4 +279,17 @@ public class Vehicle implements Serializable {
 		this.vehiclePhotos = vehiclePhotos;
 	}
 
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
+	}
+
+	public static Collection<VehicleDTO> asVehiclesDto(Collection<Vehicle> vehicles){
+		List<VehicleDTO> retVal = new ArrayList<>();
+		vehicles.forEach(vehicle -> retVal.add(new VehicleDTO(vehicle)));
+		return retVal;
+	}
 }

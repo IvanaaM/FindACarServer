@@ -3,8 +3,10 @@ package com.ftn.controller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.ftn.dto.VehicleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -39,9 +41,9 @@ public class SearchController {
 	    }
 	 
 	 @PostMapping(path = "/findForDates", produces = "application/json", consumes="application/json")
-	    public List<Vehicle> searchDates(@RequestBody SearchVehiclesDTO svDTO) {
-
-	        return carService.getVehicles(svDTO);
+	    public List<VehicleDTO> searchDates(@RequestBody SearchVehiclesDTO svDTO) {
+			List<VehicleDTO> vehicles = (ArrayList)Vehicle.asVehiclesDto(carService.getVehicles(svDTO));
+	        return vehicles;
 
 	    }
 	 
