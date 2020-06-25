@@ -13,14 +13,9 @@ import java.util.Set;
 @Entity(name = "User")
 public class User implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	//@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@JsonIgnore
     private long id;
 
@@ -58,10 +53,10 @@ public class User implements Serializable {
     private Set<Reservation> reservations = new HashSet<Reservation>();
     
     @OneToMany
-    @JsonIgnore
     private Set<Vehicle> favorites = new HashSet<Vehicle>();
 
     @Column
+    @JsonIgnore
     private String fcmToken;
 
     public User() {

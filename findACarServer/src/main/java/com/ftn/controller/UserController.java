@@ -2,6 +2,7 @@ package com.ftn.controller;
 
 import com.ftn.dto.RegisterDTO;
 import com.ftn.model.Reservation;
+import com.ftn.model.User;
 import com.ftn.model.Vehicle;
 import com.ftn.service.AuthService;
 
@@ -30,11 +31,20 @@ public class UserController {
         this.reservationService = reservationService;
     }
 
-    @PostMapping(path = "/logIn", produces = "application/json; charset=UTF-8")
-    public boolean logIn(@RequestBody LogInDTO userDTO) {
+    @RequestMapping(path = "/logIn", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<?> logIn(@RequestBody LogInDTO userDTO) {
 
         boolean exists = userService.logIn(userDTO);
-        return exists;
+
+        	if(exists) {
+        		User u = userService.findByEmail(userDTO.getEmail());
+        		HttpHeaders headers = new HttpHeaders();
+    		    headers.setContentType(MediaType.APPLICATION_JSON);
+        		return new ResponseEntity<User>(u, headers, HttpStatus.OK);
+        	} else {
+        		return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+        	}
 
     }
 
