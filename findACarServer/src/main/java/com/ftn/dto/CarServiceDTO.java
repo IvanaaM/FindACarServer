@@ -1,6 +1,7 @@
 package com.ftn.dto;
 
 import com.ftn.model.Address;
+import com.ftn.model.CarService;
 
 public class CarServiceDTO {
 	
@@ -26,6 +27,17 @@ public class CarServiceDTO {
 		this.email = email;
 		this.address = address;
 		this.about = about;
+	}
+
+	public CarServiceDTO(CarService carService){
+		this.id = carService.getId();
+		this.name = carService.getName();
+		this.phone = carService.getPhone();
+		this.landlinePhone = carService.getLandlinePhone();
+		this.email = carService.getLandlinePhone();
+		this.address = carService.getAddress();
+		this.about = carService.getAbout();
+
 	}
 	public long getId() {
 		return id;

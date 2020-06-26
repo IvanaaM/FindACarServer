@@ -1,5 +1,12 @@
 package com.ftn.dto;
 
+import com.ftn.model.Review;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+
 public class ReviewDTO {
 	
 	private long id;
@@ -21,6 +28,17 @@ public class ReviewDTO {
 		this.date = date;
 		this.nameUser = nameUser;
 	}
+
+	public ReviewDTO(Review review){
+        this.id = review.getId();
+        this.comment = review.getComment();
+        this.rating = review.getRating();
+        Instant instant = review.getDate().toInstant();
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime ldt = instant.atOffset(ZoneOffset.UTC).toLocalDateTime();
+        this.date = ldt.format(fmt);
+        this.nameUser = review.getUser().getFirstName() + " " + review.getUser().getLastName();
+    }
 	
 	public long getId() {
 		return id;

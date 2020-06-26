@@ -2,7 +2,10 @@ package com.ftn.model;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +16,7 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ftn.dto.ReviewDTO;
 
 @Entity(name="Review")
 public class Review implements Serializable {
@@ -24,7 +28,7 @@ public class Review implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonIgnore
+	//@JsonIgnore
 	private long id;
 	
 	@Column(name="Comment")
@@ -85,6 +89,10 @@ public class Review implements Serializable {
 		this.user = user;
 	}
 
-
+	public static Collection<ReviewDTO> asReviewsDTO(Collection<Review> reviews){
+		List<ReviewDTO> retVal = new ArrayList<>();
+		reviews.forEach(review -> retVal.add(new ReviewDTO(review)));
+		return retVal;
+	}
 
 }

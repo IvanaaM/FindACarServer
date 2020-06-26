@@ -1,12 +1,15 @@
 package com.ftn.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ftn.model.Pricelist;
+import com.ftn.model.Review;
+import com.ftn.model.Vehicle;
 import com.ftn.model.VehiclePhoto;
 
 public class VehicleDTO {
-	
+
     private long vehicleId;
     private long id;
     private String name;
@@ -32,6 +35,31 @@ public class VehicleDTO {
     private long version;
 
     public VehicleDTO() {
+    }
+
+    public VehicleDTO(Vehicle vehicle) {
+        id = vehicle.getId();
+        name = vehicle.getName();
+        description = vehicle.getDescription();
+        seats = vehicle.getSeats();
+        doors = vehicle.getDoors();
+        cases = vehicle.getCases();
+        type = vehicle.getType();
+        airCond = vehicle.isAirCond();
+        autom = vehicle.isAutom();
+        regUntil = vehicle.getRegUntil();
+        prodYear = vehicle.getProdYear();
+        fuel = vehicle.getFuel();
+        deposit = vehicle.isDeposit();
+        mileage = vehicle.getMileage();
+        priceForDays = vehicle.getPriceForDays();
+        pricelist = vehicle.getPricelist();
+        imageFile = vehicle.getImageFile();
+        image = vehicle.getImage();
+        vehiclePhotos = new ArrayList<>(vehicle.getVehiclePhotos());
+        cancel = vehicle.getCancel();
+        reviews = (ArrayList) Review.asReviewsDTO(vehicle.getReviews());
+        version = vehicle.getVersion();
     }
 
     public long getVehicleId() {
@@ -194,29 +222,29 @@ public class VehicleDTO {
         this.reviews = reviews;
     }
 
-	public Pricelist getPricelist() {
-		return pricelist;
-	}
+    public Pricelist getPricelist() {
+        return pricelist;
+    }
 
-	public void setPricelist(Pricelist pricelist) {
-		this.pricelist = pricelist;
-	}
+    public void setPricelist(Pricelist pricelist) {
+        this.pricelist = pricelist;
+    }
 
-	public List<VehiclePhoto> getVehiclePhotos() {
-		return vehiclePhotos;
-	}
+    public List<VehiclePhoto> getVehiclePhotos() {
+        return vehiclePhotos;
+    }
 
-	public void setVehiclePhotos(List<VehiclePhoto> vehiclePhotos) {
-		this.vehiclePhotos = vehiclePhotos;
-	}
+    public void setVehiclePhotos(List<VehiclePhoto> vehiclePhotos) {
+        this.vehiclePhotos = vehiclePhotos;
+    }
 
-	public long getVersion() {
-		return version;
-	}
+    public long getVersion() {
+        return version;
+    }
 
-	public void setVersion(long version) {
-		this.version = version;
-	}
-    
-    
+    public void setVersion(long version) {
+        this.version = version;
+    }
+
+
 }
