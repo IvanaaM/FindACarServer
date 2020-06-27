@@ -30,11 +30,11 @@ public class Reservation implements Serializable {
     private Vehicle vehicle;
 
     @Column(name = "PickUpDate")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date pickUpDate;
 
     @Column(name = "ReturnDate")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date returnDate;
 
     @Column(name = "Price")
@@ -48,6 +48,10 @@ public class Reservation implements Serializable {
 
     @ManyToMany
     private Set<AdditionalService> includedAdditionalServices = new HashSet<>();
+    @Column
+    private boolean pickupNotificationSent = false;
+    @Column
+    private boolean returnNotificationSent = false;
 
     public Reservation() {
         super();
@@ -71,7 +75,6 @@ public class Reservation implements Serializable {
     }
 
     public Date getPickUpDate() {
-        pickUpDate = setDate(pickUpDate);
         return pickUpDate;
     }
 
@@ -88,7 +91,6 @@ public class Reservation implements Serializable {
     }
 
     public Date getReturnDate() {
-        returnDate = setDate(returnDate);
         return returnDate;
     }
 
@@ -122,7 +124,6 @@ public class Reservation implements Serializable {
         return date2;
     }
 
-
     public Set<AdditionalService> getIncludedAdditionalServices() {
         return includedAdditionalServices;
     }
@@ -153,5 +154,21 @@ public class Reservation implements Serializable {
         this.price = dto.getPrice();
         this.includedAdditionalServices = includedAdditionalServices;
 
+    }
+
+    public boolean isPickupNotificationSent() {
+        return pickupNotificationSent;
+    }
+
+    public void setPickupNotificationSent(boolean pickupNotificationSent) {
+        this.pickupNotificationSent = pickupNotificationSent;
+    }
+
+    public boolean isReturnNotificationSent() {
+        return returnNotificationSent;
+    }
+
+    public void setReturnNotificationSent(boolean returnNotificationSent) {
+        this.returnNotificationSent = returnNotificationSent;
     }
 }
