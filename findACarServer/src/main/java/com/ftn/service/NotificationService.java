@@ -62,7 +62,7 @@ public class NotificationService {
 
     }
 
-    @Scheduled(fixedRate = 120000)
+    //@Scheduled(fixedRate = 120000)
     public void checkReservations() {
         List<Reservation> reservations = (ArrayList) reservationService.findAllUnnotified();
         reservations.forEach(res ->
