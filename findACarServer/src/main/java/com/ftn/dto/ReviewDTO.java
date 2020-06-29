@@ -2,6 +2,8 @@ package com.ftn.dto;
 
 import com.ftn.model.Review;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -33,10 +35,9 @@ public class ReviewDTO {
         this.id = review.getId();
         this.comment = review.getComment();
         this.rating = review.getRating();
-        Instant instant = review.getDate().toInstant();
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDateTime ldt = instant.atOffset(ZoneOffset.UTC).toLocalDateTime();
-        this.date = ldt.format(fmt);
+		String pattern = "yyyy-MM-dd'T'HH:mm:ss";
+		DateFormat df = new SimpleDateFormat(pattern);
+        this.date = df.format(review.getDate());
         this.nameUser = review.getUser().getFirstName() + " " + review.getUser().getLastName();
     }
 	

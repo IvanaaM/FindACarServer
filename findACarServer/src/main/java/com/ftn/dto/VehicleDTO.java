@@ -1,5 +1,7 @@
 package com.ftn.dto;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +49,9 @@ public class VehicleDTO {
         type = vehicle.getType();
         airCond = vehicle.isAirCond();
         autom = vehicle.isAutom();
-        regUntil = vehicle.getRegUntil();
+        String pattern = "yyyy-MM-dd'T'HH:mm:ss";
+        DateFormat df = new SimpleDateFormat(pattern);
+        regUntil = df.format(vehicle.getRegUntil());
         prodYear = vehicle.getProdYear();
         fuel = vehicle.getFuel();
         deposit = vehicle.isDeposit();

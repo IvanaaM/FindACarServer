@@ -46,7 +46,7 @@ public class Vehicle implements Serializable {
     private boolean autom;
 	
 	@Column(name="RegUntil")
-    private String regUntil;
+    private Date regUntil;
 	
 	@Column(name="ProductionYear")
     private int prodYear;
@@ -169,11 +169,11 @@ public class Vehicle implements Serializable {
 		this.autom = autom;
 	}
 
-	public String getRegUntil() {
+	public Date getRegUntil() {
 		return regUntil;
 	}
 
-	public void setRegUntil(String regUntil) {
+	public void setRegUntil(Date regUntil) {
 		this.regUntil = regUntil;
 	}
 

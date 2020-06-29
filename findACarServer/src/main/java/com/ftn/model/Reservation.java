@@ -30,11 +30,11 @@ public class Reservation implements Serializable {
     private Vehicle vehicle;
 
     @Column(name = "PickUpDate")
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
+    @JsonFormat(pattern = "yyyy-MM-ddThh:mm")
     private Date pickUpDate;
 
     @Column(name = "ReturnDate")
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
+    @JsonFormat(pattern = "yyyy-MM-ddThh:mm")
     private Date returnDate;
 
     @Column(name = "Price")
