@@ -1,5 +1,5 @@
 -- sifra je admin
-insert into user  (email, email_verified, first_name, last_name, password, registration_date, salt, token, fcm_token) values ("marko@mailinator.com", true , "Marko", "Markovic", "ORY3tic/hPfVpVk+bzsAFxgjIEXPNVUVvFEJzpHYWcs=", "2020-05-20", "fD5EfEJiiyj4SRuyVC70bu5rxUtlVC", NULL, NULL);
+insert into user  (email, email_verified, first_name, last_name, password, registration_date, salt, token, fcm_token) values ("sara@gmail.com", true , "Sara", "Saric", "ORY3tic/hPfVpVk+bzsAFxgjIEXPNVUVvFEJzpHYWcs=", "2020-05-20", "fD5EfEJiiyj4SRuyVC70bu5rxUtlVC", NULL, NULL);
 --sifra je 12345
 insert into user  (email, email_verified, first_name, last_name, password, registration_date, salt, token, fcm_token) values ("marko@gmail.com", true, "Marko", "Markovic", "hm3IhDOhsOBGxm/Py6Ca+EMJB1vJuAHiEbmPZcz+wTo=", "2020-06-02", "FaQpklJ3xq5ojPePqItilf7SIlRe1W", NULL, null );
 
@@ -60,6 +60,9 @@ insert into reservation values (2, "2020-04-15", 19200.0, "2020-04-21", 3,2, 3);
 insert into user_reservations values (2,2);
 
 insert into reservation values (3, "2020-05-23", 22400.0, "2020-05-30",null, 2, 3);
+
+#insert into user_favorites values (1, 1);
+
 insert into user_reservations values (2,3);
 
 insert into vehicle_photo values (1, "reno_clio_1.jpg");
