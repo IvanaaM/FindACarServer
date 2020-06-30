@@ -20,21 +20,21 @@ insert into pricelist values (1, 2000, 2020);
 insert into pricelist values (2, 2000, 2020);
 insert into pricelist values (3, 3200, 2020);
 
-insert into vehicle values (1, 1, 1, 1, 2, 0, "Description", 4, "Petrol","reno_clio_1.jpg",  "Unlimited","Renault Clio 5", 2017, "20/06/2021", 5, "Economy",0,1);
+insert into vehicle values (1, 1, 1, 1, 2, 0, "Description", 4, "Petrol","reno_clio_1.jpg",  "Unlimited","Renault Clio 5", 2017, "2021-06-20", 5, "Economy",0,1);
 
-insert into vehicle values (2, 1, 0, 1, 2, 0, "Description", 5, "Petrol","ford_fiesta_1.jpg",  "Unlimited", "Ford fiesta", 2015, "12/02/2021", 5, "Medium",0, 2);
+insert into vehicle values (2, 1, 0, 1, 2, 0, "Description", 5, "Petrol","ford_fiesta_1.jpg",  "Unlimited", "Ford fiesta", 2015, "2021-02-12", 5, "Medium",0, 2);
 
-insert into vehicle values (3, 1, 0, 1, 5, 0, "Description", 5, "Diesel","nissan_2.jpg",  "Unlimited", "Nissan Qashqai", 2017, "04/11/2020", 5, "Large",0,3);
+insert into vehicle values (3, 1, 0, 1, 5, 0, "Description", 5, "Diesel","nissan_2.jpg",  "Unlimited", "Nissan Qashqai", 2017, "2020-11-04", 5, "Large",0,3);
 
 
 insert into pricelist values (4, 2500, 2020);
 insert into pricelist values (5, 1900, 2020);
 insert into pricelist values (6, 1700, 2020);
-insert into vehicle values (4, 1, 0, 1, 2, 0, "Description", 5, "Petrol", "renault_megan.jpg", "Unlimited", "Renault Megan 4", 2013, "18/10/2020", 5, "Economy", 0,4);
+insert into vehicle values (4, 1, 0, 1, 2, 0, "Description", 5, "Petrol", "renault_megan.jpg", "Unlimited", "Renault Megan 4", 2013, "2020-10-18", 5, "Economy", 0,4);
 
-insert into vehicle values (5, 1, 0, 2, 5, 0, "Description", 5, "Diesel","citroen_c3.jpg", "Unlimited", "Citroen C3", 2015, "10/05/2021", 5, "Medium", 0,5);
+insert into vehicle values (5, 1, 0, 2, 5, 0, "Description", 5, "Diesel","citroen_c3.jpg", "Unlimited", "Citroen C3", 2015, "2021-05-10", 5, "Medium", 0,5);
 
-insert into vehicle values (6, 1, 0, 1, 5, 0, "Description", 5, "Petrol","renault_twingo.jpg", "Unlimited", "Renault Twingo", 2016, "12/06/2021", 4, "Medium", 0,6);
+insert into vehicle values (6, 1, 0, 1, 5, 0, "Description", 5, "Petrol","renault_twingo.jpg", "Unlimited", "Renault Twingo", 2016, "2021-06-12", 4, "Medium", 0,6);
 
 
 insert into car_service_vehicles values (1,1);
@@ -53,15 +53,14 @@ insert into vehicle_reviews values (2, 2);
 insert into review values (3, "Great service. I will definitely use it again!", "2020-04-23", 5, 2);
 insert into vehicle_reviews values (2, 3);
 
-insert into reservation values (1, "2020-06-11", 14000.0, "2020-06-18",null,2, 1);
+insert into reservation   values (1, "2020-06-11",  false, 14000.0, "2020-06-27 16:15", false, null,2, 1 );
 insert into user_reservations values (2,1);
 
-insert into reservation values (2, "2020-04-15", 19200.0, "2020-04-21", 3,2, 3);
+insert into reservation  values (2, "2020-04-21", false, 19200.0, "2020-06-27 16:15", false, 3,2, 3);
 insert into user_reservations values (2,2);
 
-insert into reservation values (3, "2020-05-23", 22400.0, "2020-05-30",null, 2, 3);
 
-#insert into user_favorites values (1, 1);
+insert into reservation values (3, "2020-06-27 16:15", false, 22400.0, "2020-06-30",  false, null, 2, 3);
 
 insert into user_reservations values (2,3);
 

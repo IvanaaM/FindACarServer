@@ -1,11 +1,14 @@
 package com.ftn.controller;
 
 import com.ftn.dto.RegisterDTO;
+import com.ftn.dto.ReservationDTO;
+import com.ftn.dto.UserDTO;
 import com.ftn.model.Reservation;
 import com.ftn.model.User;
 import com.ftn.model.Vehicle;
 import com.ftn.service.AuthService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ftn.service.ReservationService;
@@ -41,9 +44,10 @@ public class UserController {
         		User u = userService.findByEmail(userDTO.getEmail());
         		HttpHeaders headers = new HttpHeaders();
     		    headers.setContentType(MediaType.APPLICATION_JSON);
-        		return new ResponseEntity<User>(u, headers, HttpStatus.OK);
+        		return new ResponseEntity<UserDTO>(new UserDTO(u), headers, HttpStatus.OK);
         	} else {
-        		return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+        		//return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+                return ResponseEntity.badRequest().build();
         	}
 
     }
@@ -69,10 +73,11 @@ public class UserController {
 
     @RequestMapping(path = "/res/{email}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<List<Reservation>> getUserReservations(@PathVariable String email) {
+    public ResponseEntity<List<ReservationDTO>> getUserReservations(@PathVariable String email) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        return new ResponseEntity<List<Reservation>>(reservationService.findUserReservations(email), headers, HttpStatus.OK);
+        List<ReservationDTO> retVal  = (ArrayList) ReservationDTO.asReservationsDTO(reservationService.findUserReservations(email));
+        return new ResponseEntity<List<ReservationDTO>>(retVal, headers, HttpStatus.OK);
 
     }
 

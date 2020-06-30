@@ -38,7 +38,7 @@ public class Review implements Serializable {
     private float rating;
 		
 	@Column(name="Date")
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     private Date date;
 	
 	@ManyToOne

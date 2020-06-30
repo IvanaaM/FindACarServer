@@ -1,8 +1,14 @@
 package com.ftn.service;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import com.ftn.dto.CreateReservationDTO;
+import com.ftn.model.Review;
 import com.ftn.model.User;
 import com.ftn.model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,50 +42,59 @@ public class ReservationService {
         if (user != null) {
             Vehicle vehicle = vehicleService.findById(newReservation.getVehicle().getId());
             if (vehicle != null) {
-					Reservation reservation = new Reservation(newReservation, new HashSet<>(), vehicle, user);
-					user.getReservations().add(reservationRepository.save(reservation));
-					userService.userRepository.save(user);
-					
-					success = true;
+                Reservation reservation = new Reservation(newReservation, new HashSet<>(), vehicle, user);
+                user.getReservations().add(reservationRepository.save(reservation));
+                userService.userRepository.save(user);
+
+                success = true;
             }
         }
         return success;
     }
 
-	public List<Reservation> findUserReservations(String email){
+    public List<Reservation> findUserReservations(String email) {
 
-		User u = userService.findByEmail(email + ".com");
+        User u = userService.findByEmail(email + ".com");
 
-		List<Reservation> res = new ArrayList<Reservation>();
-		if(u==null) {
-			System.out.println("error");
-		} else {
+        List<Reservation> res = new ArrayList<Reservation>();
+        if (u == null) {
+            System.out.println("error");
+        } else {
 
-			for(Reservation r : u.getReservations()) {
-				res.add(r);
-			}
+            for (Reservation r : u.getReservations()) {
+                res.add(r);
+            }
 
-		}
+        }
 
-		Collections.sort(res, new SortRes());
-		return res;
-	}
+        Collections.sort(res, new SortRes());
+        return res;
+    }
 
-	public class SortRes implements Comparator<Reservation>
-	{
+    public class SortRes implements Comparator<Reservation> {
 
-		@Override
-		public int compare(Reservation o1, Reservation o2) {
+        @Override
+        public int compare(Reservation o1, Reservation o2) {
 
-			return (int) (o1.getId() - o2.getId());
-		}
-	}
+            return (int) (o1.getId() - o2.getId());
+        }
+    }
 
-	public void removeReservation(long id) {
+    public void removeReservation(long id) {
 
-		reservationRepository.deleteById(id);
+        reservationRepository.deleteById(id);
 
-	}
+    }
+
+    public List<Reservation> findAllUnnotified(){
+        return reservationRepository.findAllByPickupNotificationSentIsFalseOrReturnNotificationSentIsFalse();
+    }
+
+    public void update(Reservation reservation){
+        this.reservationRepository.save(reservation);
+    }
+
+
 
 
 }

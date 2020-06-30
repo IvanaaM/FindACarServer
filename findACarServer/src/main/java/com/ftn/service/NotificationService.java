@@ -1,5 +1,6 @@
 package com.ftn.service;
 
+import com.ftn.model.Reservation;
 import com.ftn.model.User;
 import com.ftn.utils.firebase.NotificationParameter;
 import com.ftn.utils.firebase.PushNotificationRequest;
@@ -12,19 +13,25 @@ import org.springframework.stereotype.Service;
 import com.google.firebase.messaging.*;
 
 import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class NotificationService {
     private String host;
     private JavaMailSender mailSender;
     private UserService userService;
+    private ReservationService reservationService;
 
     @Autowired
-    public NotificationService(JavaMailSender mailSender, UserService userService) {
+    public NotificationService(JavaMailSender mailSender, UserService userService, ReservationService reservationService) {
         this.host = "http://localhost:8057";
         this.mailSender = mailSender;
         this.userService = userService;
+        this.reservationService = reservationService;
     }
 
     private SimpleMailMessage composeEmail(String recipient, String subject, String notification) {
@@ -54,15 +61,39 @@ public class NotificationService {
         }
 
     }
-    //@Scheduled(fixedRate = 35000)
-    public void sendFirebaseNotif(){
-        PushNotificationRequest request = new PushNotificationRequest("Tittle", "Message body",
-                "clFxY_cvFPg:APA91bE2F21nc-MqD0xsVpL8ZECJ20ke_aGvUPbkI6FDH7HShlLpSobpV_9tJBemef44HEfcqjBbSyQdsaXo3MdTbQwCaUuwI8ydySxzJh9WNqBIbzVHL0hjp6IFur0g5iHcc3AVQags", "topic");
+
+    //@Scheduled(fixedRate = 120000)
+    public void checkReservations() {
+        List<Reservation> reservations = (ArrayList) reservationService.findAllUnnotified();
+        reservations.forEach(res ->
+        {
+            if (isHoursBefore(2, res.getPickUpDate())) {
+                System.out.println("nasao");
+                sendFirebaseNotif(res, "Vehicle Pick Up","Please pick up the reserved vehicle: " + res.getVehicle().getName() + " within the next 2 hours.");
+                res.setPickupNotificationSent(true);
+                reservationService.update(res);
+            }
+
+            if (isHoursBefore(2, res.getReturnDate())) {
+                System.out.println("nasao");
+                sendFirebaseNotif(res, "Vehicle return","Please return the reserved vehicle: " + res.getVehicle().getName() + " within the next 2 hours.");
+                res.setReturnNotificationSent(true);
+                reservationService.update(res);
+            }
+
+        });
+    }
+
+    @Async
+    public void sendFirebaseNotif(Reservation reservation, String title, String message) {
+
+        PushNotificationRequest request = new PushNotificationRequest(title, message, reservation.getUser().getFcmToken(), "topic");
         try {
             sendMessageToToken(request);
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
+
     }
 
     public void sendMessageToToken(PushNotificationRequest request)
@@ -88,6 +119,7 @@ public class NotificationService {
                 .setApnsConfig(apnsConfig).setAndroidConfig(androidConfig).setNotification(
                         new Notification(request.getTitle(), request.getMessage()));
     }
+
     private AndroidConfig getAndroidConfig(String topic) {
         return AndroidConfig.builder()
                 .setTtl(Duration.ofMinutes(2).toMillis()).setCollapseKey(topic)
@@ -102,5 +134,23 @@ public class NotificationService {
     }
 
 
+    private boolean isHoursBefore(int hours, Date date) {
+        Date temp = addHours(date, hours);
+        long mins = getDateDiff(new Date(), temp, TimeUnit.MINUTES);
+        return mins < 10;
+    }
+
+    private Date addHours(Date date, int hours) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.HOUR, hours);
+        Date retVal = cal.getTime();
+        return retVal;
+    }
+
+    private long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+        long diff = Math.abs(timeUnit.convert(date2.getTime() - date1.getTime(), TimeUnit.MILLISECONDS));
+        return diff;
+    }
 
 }
