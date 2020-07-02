@@ -60,11 +60,10 @@ public class ReservationService {
         if (u == null) {
             System.out.println("error");
         } else {
-
-            for (Reservation r : u.getReservations()) {
+            res = reservationRepository.findAllByUserEmail(u.getEmail());
+        /*    for (Reservation r : u.getReservations()) {
                 res.add(r);
-            }
-
+            }*/
         }
 
         Collections.sort(res, new SortRes());

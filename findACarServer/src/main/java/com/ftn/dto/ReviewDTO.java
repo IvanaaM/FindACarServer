@@ -40,6 +40,14 @@ public class ReviewDTO {
         this.date = df.format(review.getDate());
         this.nameUser = review.getUser().getFirstName() + " " + review.getUser().getLastName();
     }
+
+    public static ReviewDTO newInstance(Review review){
+		if (review == null){
+			return null;
+		}else {
+			return new ReviewDTO(review);
+		}
+	}
 	
 	public long getId() {
 		return id;

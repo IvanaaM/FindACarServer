@@ -15,6 +15,7 @@ public class ReservationDTO {
     private String pickUpDate;
     private String returnDate;
     private double price;
+    private ReviewDTO review;
 
     public ReservationDTO(Long id, String userEmail, VehicleDTO vehicle, String pickUpDate, String returnDate, double price) {
         this.id = id;
@@ -35,6 +36,7 @@ public class ReservationDTO {
         this.pickUpDate = df.format(reservation.getPickUpDate());;
         this.returnDate = df.format(reservation.getReturnDate());;
         this.price = reservation.getPrice();
+        this.review =ReviewDTO.newInstance(reservation.getReview());
     }
 
     public static Collection<ReservationDTO> asReservationsDTO(Collection<Reservation> reviews){
