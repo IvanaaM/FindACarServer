@@ -17,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.ftn.dto.ChangePasswordDTO;
 import com.ftn.dto.LogInDTO;
 import com.ftn.service.UserService;
 
@@ -119,5 +121,14 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
 
+    }
+    
+    @PostMapping("/auth/changePassword/{email}")
+    public ResponseEntity<Void> changePassword(@PathVariable String email, @RequestBody ChangePasswordDTO changePasswordDTO) {
+        if (authService.changePassword(email, changePasswordDTO)) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
