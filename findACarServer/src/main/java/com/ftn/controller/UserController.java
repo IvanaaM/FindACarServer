@@ -40,15 +40,15 @@ public class UserController {
 
         boolean exists = userService.logIn(userDTO);
 
-        	if(exists) {
-        		User u = userService.findByEmail(userDTO.getEmail());
-        		HttpHeaders headers = new HttpHeaders();
-    		    headers.setContentType(MediaType.APPLICATION_JSON);
-        		return new ResponseEntity<UserDTO>(new UserDTO(u), headers, HttpStatus.OK);
-        	} else {
-        		//return new ResponseEntity<Boolean>(false, HttpStatus.OK);
-                return ResponseEntity.badRequest().build();
-        	}
+        if (exists) {
+            User u = userService.findByEmail(userDTO.getEmail());
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            return new ResponseEntity<UserDTO>(new UserDTO(u), headers, HttpStatus.OK);
+        } else {
+            //return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+            return ResponseEntity.badRequest().build();
+        }
 
     }
 
@@ -76,7 +76,7 @@ public class UserController {
     public ResponseEntity<List<ReservationDTO>> getUserReservations(@PathVariable String email) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        List<ReservationDTO> retVal  = (ArrayList) ReservationDTO.asReservationsDTO(reservationService.findUserReservations(email));
+        List<ReservationDTO> retVal = (ArrayList) ReservationDTO.asReservationsDTO(reservationService.findUserReservations(email));
         return new ResponseEntity<List<ReservationDTO>>(retVal, headers, HttpStatus.OK);
 
     }
@@ -99,13 +99,25 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
     }
-    
+
     @PostMapping("/addFavorite/{email}/{idVehicle}")
-    public ResponseEntity<Void> addToFavorites(@PathVariable String email, @PathVariable long idVehicle){
-    	
-    	userService.addFavorite(email,idVehicle);
-    	
-    	return ResponseEntity.ok().build();
-    	
+    public ResponseEntity<Void> addToFavorites(@PathVariable String email, @PathVariable long idVehicle) {
+
+        if (userService.addVehicleToFavorites(email, idVehicle)) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+
+    }
+
+    @DeleteMapping("/{email}/favorite-vehicles/{vehicleId}")
+    public ResponseEntity<Void> removeVehicleFromFavorites(@PathVariable String email, @PathVariable long vehicleId) {
+        if (userService.removeVehicleFromFavorites(email, vehicleId)) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+
     }
 }

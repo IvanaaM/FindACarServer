@@ -23,7 +23,7 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
-    
+
     @Autowired
     VehicleRepository vehicleRepository;
 
@@ -78,22 +78,36 @@ public class UserService {
         boolean success = false;
         if (email != null && fcmToken != null) {
             User user = userRepository.findByEmail(email);
-                user.setFcmToken(fcmToken);
-                userRepository.save(user);
-                success = true;
+            user.setFcmToken(fcmToken);
+            userRepository.save(user);
+            success = true;
         }
         return success;
     }
 
-	public void addFavorite(String email, long idVehicle) {
-		
-		User u = userRepository.findByEmail(email);
-		Vehicle vehicle = vehicleRepository.findById(idVehicle).get();
-		
-		u.getFavorites().add(vehicle);
-		System.out.println("uoa");
-		userRepository.save(u);
-		
-	}
+    public boolean addVehicleToFavorites(String email, long idVehicle) {
+
+        User u = userRepository.findByEmail(email);
+        Vehicle vehicle = vehicleRepository.findById(idVehicle).get();
+        if (u != null && !u.getFavorites().contains(vehicle)) {
+            u.getFavorites().add(vehicle);
+            System.out.println("uoa");
+            userRepository.save(u);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean removeVehicleFromFavorites(String email, long idVehicle) {
+        User u = userRepository.findByEmail(email);
+        Vehicle vehicle = vehicleRepository.findById(idVehicle).get();
+
+        if (u != null && u.getFavorites().contains(vehicle)) {
+            u.getFavorites().remove(vehicle);
+            userRepository.save(u);
+            return true;
+        }
+        return false;
+    }
 
 }

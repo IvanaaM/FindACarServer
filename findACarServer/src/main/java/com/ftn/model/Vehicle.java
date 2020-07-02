@@ -292,4 +292,18 @@ public class Vehicle implements Serializable {
 		vehicles.forEach(vehicle -> retVal.add(new VehicleDTO(vehicle)));
 		return retVal;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Vehicle)) return false;
+		Vehicle vehicle = (Vehicle) o;
+		return id == vehicle.id &&
+				name.equals(vehicle.name);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, name);
+	}
 }
