@@ -12,6 +12,7 @@ import java.util.UUID;
 
 @Service
 public class AuthService {
+
 	private UserService userService;
 	private NotificationService notificationService;
 
@@ -23,6 +24,10 @@ public class AuthService {
 	public boolean register(RegisterDTO registration) {
 		boolean success = false;
 		boolean error = false;
+		User found = userService.findByEmail(registration.getEmail());
+		if (found != null) {
+			return false;
+		}
 		if (registration.getPassword().equals(registration.getConfirmPassword())) {
 			String salt = PasswordUtils.getSalt(30);
 			String encodedPassword = null;
