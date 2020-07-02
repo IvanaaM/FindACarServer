@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -40,6 +41,9 @@ public class CarService {
 	
 	@Column(name="About")
 	private String about;
+	
+	@ManyToMany
+	private Set<AdditionalService> additionalServices = new HashSet<>();
 	
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -113,6 +117,14 @@ public class CarService {
 
 	public void setLandlinePhone(String landlinePhone) {
 		this.landlinePhone = landlinePhone;
+	}
+
+	public Set<AdditionalService> getAdditionalServices() {
+		return additionalServices;
+	}
+
+	public void setAdditionalServices(Set<AdditionalService> additionalServices) {
+		this.additionalServices = additionalServices;
 	}
 	
 

@@ -82,10 +82,6 @@ public class Vehicle implements Serializable {
 	@Column(name="Cancel")
 	private int cancel;
 
-	@ManyToMany
-	private Set<AdditionalService> additionalServices = new HashSet<>();
-	
-
 	@Version
 	@Column(name="Version")
 	private long version;
@@ -261,14 +257,6 @@ public class Vehicle implements Serializable {
 	@JsonIgnore
 	public Set<Review> getReviews() {
 		return reviews;
-	}
-
-	public Set<AdditionalService> getAdditionalServices() {
-		return additionalServices;
-	}
-
-	public void setAdditionalServices(Set<AdditionalService> additionalServices) {
-		this.additionalServices = additionalServices;
 	}
 
 	public Set<VehiclePhoto> getVehiclePhotos() {
