@@ -70,6 +70,24 @@ public class ReservationService {
         return res;
     }
 
+    public List<Reservation> findUserPreviousReservations(String email) {
+
+        User u = userService.findByEmail(email);
+
+        List<Reservation> res = new ArrayList<Reservation>();
+        if (u == null) {
+            System.out.println("error");
+        } else {
+            res = reservationRepository.findAllByUserEmailAndReturnDateLessThan(u.getEmail(), new Date());
+        /*    for (Reservation r : u.getReservations()) {
+                res.add(r);
+            }*/
+        }
+
+        Collections.sort(res, new SortRes());
+        return res;
+    }
+
     public class SortRes implements Comparator<Reservation> {
 
         @Override

@@ -21,6 +21,10 @@ public class AuthService {
     public boolean register(RegisterDTO registration) {
         boolean success = false;
         boolean error = false;
+        User found = userService.findByEmail(registration.getEmail());
+        if (found != null){
+            return false;
+        }
         if (registration.getPassword().equals(registration.getConfirmPassword())) {
             String salt = PasswordUtils.getSalt(30);
             String encodedPassword = null;
