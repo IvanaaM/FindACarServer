@@ -2,6 +2,7 @@ package com.ftn.dto;
 
 import com.ftn.model.Review;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
-public class ReviewDTO {
+public class ReviewDTO implements Serializable {
 	
 	private long id;
 	private String comment;

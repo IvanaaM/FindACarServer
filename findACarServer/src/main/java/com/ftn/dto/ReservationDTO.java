@@ -92,4 +92,12 @@ public class ReservationDTO {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public ReviewDTO getReview() {
+        return review;
+    }
+
+    public void setReview(ReviewDTO review) {
+        this.review = review;
+    }
 }
