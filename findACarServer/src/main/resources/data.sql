@@ -61,17 +61,15 @@ insert into review values (2, "Very good", "2020-05-20", 5, 2);
 insert into vehicle_reviews values (2, 2);
 
 insert into review values (3, "Great service. I will definitely use it again!", "2020-04-23", 5, 2);
-insert into vehicle_reviews values (2, 3);""
+insert into vehicle_reviews values (2, 3);
 
-insert into reservation   values (1, "2020-06-11",  false, 14000.0, "2020-06-27 16:15", false, null,2, 1 );
+insert into reservation (id, pick_up_date, pickup_notification_sent, price, return_date, return_notification_sent, review_id, user_id, vehicle_id)  values (1, "2020-06-11",  false, 14000.0, "2020-06-27 16:15", false, null,2, 1 );
 insert into user_reservations values (2,1);
 
 insert into reservation  values (2, "2020-04-21", false, 19200.0, "2020-06-27 16:15", false, 3,2, 3);
 insert into user_reservations values (2,2);
 
-
 insert into reservation values (3, "2020-06-27 16:15", false, 22400.0, "2020-06-30",  false, null, 2, 3);
-
 insert into user_reservations values (2,3);
 
 insert into vehicle_photo values (1, "reno_clio_1.jpg");
