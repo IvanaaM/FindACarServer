@@ -1,12 +1,11 @@
 package com.ftn.dto;
 
+import com.ftn.model.AdditionalService;
 import com.ftn.model.Reservation;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class ReservationDTO {
     private Long id;
@@ -16,6 +15,7 @@ public class ReservationDTO {
     private String returnDate;
     private double price;
     private ReviewDTO review;
+    private Set<AdditionalService> includedAdditionalServices= new HashSet<>();
 
     public ReservationDTO(Long id, String userEmail, VehicleDTO vehicle, String pickUpDate, String returnDate, double price) {
         this.id = id;
@@ -37,6 +37,7 @@ public class ReservationDTO {
         this.returnDate = df.format(reservation.getReturnDate());;
         this.price = reservation.getPrice();
         this.review =ReviewDTO.newInstance(reservation.getReview());
+        this.includedAdditionalServices = reservation.getIncludedAdditionalServices();
     }
 
     public static Collection<ReservationDTO> asReservationsDTO(Collection<Reservation> reviews){

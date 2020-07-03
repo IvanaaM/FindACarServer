@@ -42,7 +42,7 @@ public class ReservationService {
         if (user != null) {
             Vehicle vehicle = vehicleService.findById(newReservation.getVehicle().getId());
             if (vehicle != null) {
-                Reservation reservation = new Reservation(newReservation, new HashSet<>(), vehicle, user);
+                Reservation reservation = new Reservation(newReservation, vehicle, user);
                 user.getReservations().add(reservationRepository.save(reservation));
                 userService.userRepository.save(user);
 

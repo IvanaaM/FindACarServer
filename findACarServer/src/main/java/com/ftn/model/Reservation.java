@@ -140,7 +140,7 @@ public class Reservation implements Serializable {
         this.user = user;
     }
 
-    public Reservation(CreateReservationDTO dto, Set<AdditionalService> includedAdditionalServices, Vehicle vehicle, User user) {
+    public Reservation(CreateReservationDTO dto, Vehicle vehicle, User user) {
         this.vehicle = vehicle;
         String pattern = "yyyy-MM-dd HH:mm:ss";
         DateFormat dateFormat = new SimpleDateFormat(pattern);
@@ -152,7 +152,7 @@ public class Reservation implements Serializable {
         }
         this.user = user;
         this.price = dto.getPrice();
-        this.includedAdditionalServices = includedAdditionalServices;
+        this.includedAdditionalServices = new HashSet<>(dto.getIncludedAdditionalServices());
 
     }
 
