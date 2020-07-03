@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Pricelist {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@Column(name="PriceADay")
