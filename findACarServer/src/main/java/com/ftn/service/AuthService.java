@@ -1,6 +1,7 @@
 package com.ftn.service;
 
 import com.ftn.dto.ChangePasswordDTO;
+import com.ftn.dto.EditProfileDTO;
 import com.ftn.dto.RegisterDTO;
 import com.ftn.model.User;
 import com.ftn.repository.UserRepository;
@@ -96,4 +97,16 @@ public class AuthService {
 		return success;
 
 	}
+
+	public boolean editProfile(String email, EditProfileDTO editProfileDTO) {
+		boolean success = false;
+		User user = userService.findByEmail(email + ".com");
+		if (user != null) {
+			user.setFirstName(editProfileDTO.getFirstName());
+			user.setLastName(editProfileDTO.getLastName());
+			success = userService.edit(user);
+		}
+		return success;
+	}
+
 }

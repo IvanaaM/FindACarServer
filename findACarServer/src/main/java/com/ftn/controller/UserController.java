@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.ftn.dto.ChangePasswordDTO;
+import com.ftn.dto.EditProfileDTO;
 import com.ftn.dto.LogInDTO;
 import com.ftn.service.UserService;
 
@@ -126,6 +127,15 @@ public class UserController {
     @PostMapping("/auth/changePassword/{email}")
     public ResponseEntity<Void> changePassword(@PathVariable String email, @RequestBody ChangePasswordDTO changePasswordDTO) {
         if (authService.changePassword(email, changePasswordDTO)) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+    
+    @PostMapping("/auth/editProfile/{email}")
+    public ResponseEntity<Void> editProfile(@PathVariable String email, @RequestBody EditProfileDTO editProfileDTO) {
+    	if (authService.editProfile(email, editProfileDTO)) {
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.badRequest().build();
